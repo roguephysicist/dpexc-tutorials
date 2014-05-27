@@ -1,0 +1,37 @@
+longrange  # calculation using the model kernel alpha/q^2
+so         # allows use of scissory correction specified by soenergy
+shiftk     # symmetries are not used for shifted k-point sets
+           # inversion is not used
+
+# The choice of G-shells is still possible both using npwmat or matsh
+#npwmat  59
+matsh 6     # number of shells of G-vectors for the \epsilon matrix
+#npwwfn 283
+wfnsh 15    # number of shells of plane waves to describe the wavefunctions
+
+# Number of bands to include in the construction of \chi_0
+nbands  8   # number of the last band
+lomo 2      # number of the first band
+
+# In the case of optical absorption the value of the 
+# perturbation wavevector q is 0
+# DP considers automatically 6 different polarization directions 
+# (3 Cartesian axis and 3 reciprocal lattice vector directions)
+q
+0.0 0.0 0.0 # q [reduced coordinates] (if q is exactly 0 -> 6 pol)
+
+# Frequency range of interest in eV
+omegai 0.0  # initial frequency
+omegae 7.0  # last frequency
+domega 0.01 # delta \omega
+
+# Broadening of the curve: it is usually advised to use a small
+# broadening here (0.01 eV) and add more broadening in a second time
+# using the tool "broad"
+broad  0.075 # Lorentzian broadening
+
+# Scissor operator in eV
+soenergy 0.65
+
+# Value of the parameter alpha
+alpha -0.2

@@ -1,0 +1,239 @@
+!!****o* Tutorials/list_of_variables
+!! NAME
+!! DP List of Input variables 
+!!
+!! SYNOPSIS
+
+verboselevel <num> ! <num>=0,1,2,3   
+                   !       0) minimum amount of info written down
+                   !       1) default values. essential things are written down
+                   !       2) Verbose mode: many more things are written down
+                   !       3) Debug mode: to use only in debugging case, 
+                   !                      all the loop indices are written 
+                   !                      (tree and mem files created)
+
+
+!-----  Type of calculation (default: linear response:tddft)  -------------------
+linear          ! default: linear response in G space. 
+                !          solving the tddft equation for \chi
+
+exciton         ! excitonic calculation (the EXC code) in transition space
+
+photoemission   ! photoemission spectrum. implies the variable ephoton (see below)
+ephoton <num>   ! value of the incoming photon for the photoemission spectrum
+
+nonlinear       ! nonlinear tddft equation: to be merged from the nonlinear code
+
+current         ! time dependent current DFT: to be implemented
+!--------------------------------------------------------------------------------
+
+!--------- Dielectric function (default: testparticle) -----------------------
+testparticle  ! default: normal equation for the inverse dielectric function
+testelectron  ! to be used only for testing or for particular purposes 
+              ! (vertex corrections)
+!-----------------------------------------------------------------------------
+
+!---------- Energies for the \chi^0 (default:enks) -----------------------------------------
+enks                    ! default: use the Kohn-Sham eigenvalues found in the ground-state file
+                        !          to construct the denominator of \chi^0
+gw                      ! perturbative GW energies: this variable implies the existence of a gwfile
+qpsenergy               ! self-consistent quasiparticle energies. this variable implies the existence 
+                        !                                         of a qps file
+so                      ! scissor operator correction. see below soenergy, stretch_valence, stretch_conduction
+soenergy <num>          ! value of the scissor correction. default: 0.0
+stretch_valence <num>   ! stretch = GW bandwidth / DFT bandwidth. default: 1.0 
+stretch_conduction <num>! modify energy in a linear way in order to reproduce the GW bandwidth like: e_GW = e_DFT * stretch
+somult                  ! multi-scissor operator correction. implies the existence of a file
+                        !                                    called somult.in
+lifetime                ! use the Im(\Sigma) as lifetime (broadening) in the denominator of \chi^0.
+                        !     this implies the presence in the gw file of the ImIm(\Sigma)
+!-------------------------------------------------------------------------------------------
+
+
+!---------- Wavefunctions for the \chi^0 (default:kss) -------------------------------------
+kss      ! default. use the Kohn-Sham wavefunctions found in the ground-state file
+         !          to construct the numerator of \chi^0
+qps      ! self-consistent quasiparticle eavefunctions. this variable implies the existence 
+         !                                              of a qps file
+!-------------------------------------------------------------------------------------------
+
+!----- analysis calculation ------------------------------------------------------------------
+jdos               ! joint density of states = only KS energies taken into account
+printmatrixelement ! only matrix elements (rhotw) taken into account, not energies 
+matelanalysis      ! do a normal calculation, but ion addition it creates a file, called
+                   ! matelanalysis.out containing the matrix elements for a further analysis
+!---------------------------------------------------------------------------------------------
+
+!----- kernel (tddft default:rpa; exciton default:exc) ---------------------------------------------
+rpa                ! default: random phase approximation ===>  fxc = 0
+alda               ! adiabatic local density approximation ==> 
+                   !                               fxc = \delta Vxc^lda / \delta n
+longrange          ! longrange alpha kernel ==> fxc = alpha / q^2. see below for the value of alpha
+dyn_longrange      ! dynamical longrange alpha kernel ==> fxc = (alpha + beta w) / q^2. 
+                   !  see below for the value of alpha and beta.
+alpha   <num>      ! value of alpha in the longrange or dyn_longrange kernel. default: 0.0
+beta    <num>      ! value of beta in the dyn_longrange kernel. default: 0.0
+fxcmt              ! mapping theory kernel. implies the existence of a screening file (in.em1)
+exc                ! full exciton calculation. implies the existence of a screening file. 
+                   ! this is the default for EXC.
+!---------------------------------------------------------------------------------------------------
+
+!------ Tamm-Dancoff Approximation (default only in the excitonic case) ------------------------------
+tammdancoff   ! if this flag occurs the calculation will use the so-called Tamm-Dancoff approximation, 
+              ! i.e. only the resonant part of \chi_0 will be taken into account
+resonant      ! equivalent of tammdancoff but in the exciton framework
+              ! TODO: unifying the two variables.
+!-----------------------------------------------------------------------------------------------------
+
+!--- Exciton solver (default:fulldiago) --------------------------------------------------------------
+fulldiago       ! default. diagonalization of the excitonic hamiltonian. 
+haydock         ! iterative inversion of the excitonic hamiltonian. implies the variable niter (see below).
+                ! only the final spectrum is obtained but no  excitonic eigenvalues and eigenvectors, 
+                ! preventing further analysis. 
+niter <num>     ! number of iterations for the haydock iterative procedure. default:100     
+haydock_restart ! write restart file. default false
+!-----------------------------------------------------------------------------------------------------
+
+!---- Variables for the EXC code -----------------------------------------------------------
+wdiag   ! default: only the diagonal (in G) of Wgg' is retained. it turns out to be a good 
+        !          approximation for solids
+wfull   !the whole gg' structure of W is used. important for clusters.
+
+lf      ! default: calculate also the exchange term <<v>>.
+nlf     ! avoid the calculation of the exchange term <<v>>. this corresponds in an rpa
+        ! calculation to do a calculation without local fields.
+!-------------------------------------------------------------------------------------------
+
+
+!----- Use of shikted k-points ---------------------------------------------------
+shiftk     ! if the ground state structure has been calculated using shifted 
+           ! k-points, we have to tell dp about it, otherwise it will try to use 
+           ! the symmetries of the system to sample the whole Brillouin zone.
+           ! Alternatively (and deprecatively) you can still use the old way ... 
+nsym 1     ! force DP to consider only the first Symmetry (the identity)
+noinv      ! so not use inversion 
+           ! Remember: either one uses the 'shiftk' flag OR 'nsym 1' + 'noinv'. 
+           ! TODO: this will be evaluated automatically by DP, from version 5.3 
+!--------------------------------------------------------------------------------
+
+!----- convergency parameters ----------------------------------------------------
+npwwfn <num>    ! number of plane waves to describe the wavefunctions  
+                ! default: all plane waves found on the _KSS file will be used
+wfnsh <num>     ! number of shells of plane waves to describe the wavefunctions 
+                ! default:all
+                ! Remark: only one of the above parameters has to be specified
+
+npwmat <num>    ! number of G-vectors for the \epsilon matrix (related to local 
+                ! fields) ! default:all
+matsh <num>     ! number of shells of G-vectors for the \epsilon matrix (related 
+                ! to local fields) ! default:all
+                !  Remark: only one of the above parameters has to be specified
+
+nbands <num>    ! number of the last band (highest energy) to be included in the 
+                ! calculation ! default:all
+lomo <num>      ! number of the first band (lowest energy) to be included in the 
+                ! calculation ! default:1
+
+selected_bands  ! DP: enable the selection of the specific bands to be used in 
+                ! the  calculation. this implies the existence of a file called 
+                ! bands.in where the selected bands are listed (one per line).
+
+selected_kpts   ! DP: enable the selection of the specific k-points to be used in 
+                ! the calculation. this implies the existence of a file called 
+                ! kpts.in where the kpoints are listed (like: -0.5 0.33 0) one 
+                ! per line 
+!---------------------------------------------------------------------------------
+
+!-- Pseudopotential --------------------------------------------------------------
+novkb   ! exclude the nonlocal part of the pseudopotential, which is unfortunately
+        ! the leading term for a big number of transitions
+!---------------------------------------------------------------------------------
+
+!--- Hilbert transform --------------------------------------------------------
+hilbert    ! if this flag occurs, the Hilbert Transform will be used to
+           ! construct the \chi_0. This is particularly convenient when a big
+           ! range of energies is requested. See details at
+           ! http://link.aps.org/abstract/PRB/v75/e205405
+!------------------------------------------------------------------------------
+
+!---- metallic and DRUDE  (EXPERIMENTAL)----------------------------------------
+metal      ! if this flag occurs, a metallic behaviour is considered, the 
+           ! occupation numbers will be treated as fractional. 
+           ! The temperature is set by kBT (see below). 
+kBT <num>  ! electronic temperature (eV). Default: 0.001 (315 K)
+occopt  99 ! debugging option: take the occupation values as written in the kss 
+
+drude      ! calculate also the intraband contribution using the drude formula
+onlydrude  ! calculate only the intraband contribution using the drude formula
+!-------------------------------------------------------------------------------
+
+
+!---- Energy Range (all values in eV) ------------------------------------------
+omegai <num>  ! initial frequency 
+omegae <num>  ! ending frequency 
+domega <num>  ! frequency Mesh (delta omega). Default: 0.1 
+              ! the choice of the above 3 values uniquely determines the number 
+              ! of frequencies, via   nomega=(omegae-omegai)/domega + 0.5 +1 
+broad <num>   ! Lorentzian broadening. It's better to put a small number here 
+              ! (0.001 - 0.01) and use the 'broad' utility to convolute the 
+              ! obtained curves afterwards.  Default: domega  
+!-------------------------------------------------------------------------------
+
+!----- Momentum Transfer - Polarization of light ---------------------------------
+q
+<numx> <numy> <numz>  ! This specifies the momentun transfer (vector) to the 
+                      ! system. The value of q can range from 0 to very high 
+                      ! value (several Brilloun zones equivalent)
+                      ! Very high q vector can be found in Electron energy loss 
+                      ! or Inelastic X-ray Scattering. The case q=0 is 
+                      ! particularly important for optical absorption, where the 
+                      ! polarization of light can be secified giving a small 
+                      ! value in one or another direction, e.g. 
+                      ! q 0.0001 0.0001 0.0
+                      ! Remark: q uses the reduced coordinates here, not the 
+                      ! cartesian ones.
+                      ! TODO: give the possibility to choose the coordinates 
+                      !  (reduced or cartesian) 
+doublegrid            ! Allows to read two separate KSS-files for initial and final
+                      ! states, which are shifted by q with respect to each other.
+                      ! (e.g. k.p perturbation theory will be avoided at small q)
+                      ! USAGE: dp -i <dp.in> -k <dp1.kss> -k <dp2.kss>
+                      !   dp1.kss corresponds to the final   states at k,
+                      !   dp2.kss corresponds to the initial states at k-q
+antieps               ! calculation of eps*(-q,-w) instead of eps(q,w), which
+                      ! corresponds to exchanging the two kss files in doublegrid
+!---------------------------------------------------------------------------------
+
+!------ Handling chi0 -------------------------------------------------------
+writechi0        ! write down the chi0 into a (binary) file called chi0.dat 
+writefullchi     ! write down the chi into a (binary) file called chi.dat 
+                 ! (currently only supported for RPA calculations)
+readchi0         ! read the chi0 from a (binary) file called chi0.dat 
+!----------------------------------------------------------------------------
+
+!----- Optimization flags ----------------------------------------------------------
+savememory       ! if present this flag will make the code calculating the rhotw
+                 ! at any transition with a double Fourier transform, rather than
+                 ! storing the wave functions in real space. Advantage: important 
+                 ! reduction of the memory. Disadvantage: 3 instead of 2 Fourier
+                 ! transform per wavefunction. 
+                 ! TODO: making this default.
+testrun          ! performs testrun to estimate calculation time and memory
+!-----------------------------------------------------------------------------------
+
+!-------- undocumented variables (and so to be documented :) ---------------------------
+pert       
+blockpert  
+encutoff
+dielconstscreen
+coulcutoff
+ircut
+uvcut
+stripecut
+renormdielconst
+rlcut
+kernel
+x-1x
+!-------------------------------------------------------------------------------------
+
+!!***
