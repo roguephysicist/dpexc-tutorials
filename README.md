@@ -140,7 +140,7 @@ The first part of the DP Tutorial takes 20.64 seconds in sequential mode, 6.24 s
 As I understand it, DP works fastest when running with OpenMP. When diagonalizing the Hamiltonian with the iterative Haydock scheme, OpenMP is also faster. Constructing the Hamiltonian with excitonic effects will be faster using MPI. OpenMP (with `export OMP_STACKSIZE=1M`) and you can calculate the memory usage with
 ```
 (12x12x4x8x12)^2*8/1024
-(kpts * Nv * Nc)^2 * Bites / 1024^(GB,MB,KB)
+(kpts * Nv * Nc)^2 * Bytes / 1024^(GB,MB,KB)
 ```
 
 Nero install instructions
