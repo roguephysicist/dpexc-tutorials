@@ -50,7 +50,7 @@ First, we need to configure ABINIT for our particular system. For *Medusa* we co
 
 followed by an optional `make clean`, and `make mj4`.
 
-The binary is at `$HOME/bin/bin/abinip` which you can add to your PATH, but you can also add a handy alias like `abinit='$HOME/abinit-5.7.3_etsf/src/main/abinip'` to your `.bashrc`.
+The binary is at `$HOME/bin/bin/abinip` which you can add to your PATH, but you can also add a handy alias like `abinit='$HOME/bin/bin/abinip'` to your `.bashrc`.
 
 #### FFTW 3.3.4:
 For *Medusa*, we configure our FFTW install with
