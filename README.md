@@ -45,17 +45,17 @@ Individual configuration and installation notes follow.
 #### ABINIT 5.7.3 (etsf):
 First, we need to configure ABINIT for our particular system. For *Medusa* we configure with 
 ```bash
-./configure --prefix=$HOME/bin/ FC=mpiifort CC=mpiicc CXX=icc --disable-all-plugins --enable-mpi MPI_RUNNER=mpiexec --enable-mpi-trace --enable-64bit-flags --enable-gw-dpc --host=x86_64 CFLAGS_EXTRA="-axSSE4.2 -ip"
+./configure --prefix=$HOME/bin FC=mpiifort CC=mpiicc CXX=icc --disable-all-plugins --enable-mpi MPI_RUNNER=mpiexec --enable-mpi-trace --enable-64bit-flags --enable-gw-dpc --host=x86_64 CFLAGS_EXTRA="-axSSE4.2 -ip"
 ```
 
 followed by an optional `make clean`, and `make mj4`.
 
-The binary is at `abinit/src/main/abinip` which you can add to your PATH, but you can also add a handy alias like `abinit='$HOME/abinit-5.7.3_etsf/src/main/abinip'` to your `.bashrc`.
+The binary is at `$HOME/bin/bin/abinip` which you can add to your PATH, but you can also add a handy alias like `abinit='$HOME/abinit-5.7.3_etsf/src/main/abinip'` to your `.bashrc`.
 
 #### FFTW 3.3.4:
 For *Medusa*, we configure our FFTW install with
 ```bash
-./configure --prefix=/home/sma/fftw-3.3.4/ CC=icc
+./configure --prefix=$HOME/bin/fftw-3.3.4/ CC=icc
 ```
 
 then the usual `make clean`, `make`, and optionally, `make install`.
@@ -72,29 +72,30 @@ With these librarires properly compiled you can proceed to configure the DP buil
 
 * For sequential use:
 ```bash
-./configure --prefix=$HOME/bin/ CC=icc F90=ifort F90FLAGS="-O3" LDFLAGS=-nofor_main --with-fftw3=/home/sma/fftw-3.3.4/ --with-blas="-L/home/sma/lapack-3.5.0/ -lrefblas"
+./configure --prefix=$HOME/bin CC=icc F90=ifort F90FLAGS="-O3" LDFLAGS=-nofor_main --with-fftw3=/home/sma/src/fftw-3.3.4/ --with-blas="-L/home/sma/src/lapack-3.5.0/ -lrefblas"
 ```
 
 * for parallel use with MPI:
 ```bash
-./configure --prefix=$HOME/bin/ MPI_F90=mpiifort MPI_CC=mpiicc CC=icc F90=ifort F90FLAGS="-O3" LDFLAGS=-nofor_main --with-fftw3=/home/sma/fftw-3.3.4/ --with-blas="-L/home/sma/lapack-3.5.0/ -lrefblas" --enable-mpi
+./configure --prefix=$HOME/bin MPI_F90=mpiifort MPI_CC=mpiicc CC=icc F90=ifort F90FLAGS="-O3" LDFLAGS=-nofor_main --with-fftw3=/home/sma/src/fftw-3.3.4/ --with-blas="-L/home/sma/src/lapack-3.5.0/ -lrefblas" --enable-mpi
 ```
 
 * for parallel use with OpenMP:
 ```bash
-./configure --prefix=$HOME/bin/ CC=icc --with-blas="-L/home/sma/lapack-3.5.0/ -lrefblas" --with-fftw3=/home/sma/fftw-3.3.4/ F90=ifort F90FLAGS="-O3 -g -pg -openmp" LDFLAGS=-nofor_main  --enable-openmp
+./configure --prefix=$HOME/bin CC=icc --with-blas="-L/home/sma/src/lapack-3.5.0/ -lrefblas" --with-fftw3=/home/sma/src/fftw-3.3.4/ F90=ifort F90FLAGS="-O3 -g -pg -openmp" LDFLAGS=-nofor_main  --enable-openmp
 ```
 
 * and for [Intel® MKL](https://software.intel.com/en-us/articles/intel-mkl-link-line-advisor):
 ```bash
-./configure --prefix=$HOME/dpforexc CC=icc F90=ifort F90FLAGS="-O3 -i8 -I/opt/intel/composer_xe_2011_sp1.6.233/mkl/include" LDFLAGS=-nofor_main --with-fftw3=/home/sma/fftw-3.3.4/ --with-blas="-Wl,--start-group /opt/intel/composer_xe_2011_sp1.6.233/mkl/lib/intel64/libmkl_intel_ilp64.a /opt/intel/composer_xe_2011_sp1.6.233/mkl/lib/intel64/libmkl_core.a /opt/intel/composer_xe_2011_sp1.6.233/mkl/lib/intel64/libmkl_sequential.a -Wl,--end-group -lpthread -lm" --with-lapack="-Wl,--start-group /opt/intel/composer_xe_2011_sp1.6.233/mkl/lib/intel64/libmkl_intel_ilp64.a /opt/intel/composer_xe_2011_sp1.6.233/mkl/lib/intel64/libmkl_core.a /opt/intel/composer_xe_2011_sp1.6.233/mkl/lib/intel64/libmkl_sequential.a -Wl,--end-group -lpthread -lm"
+./configure --prefix=$HOME/bin CC=icc F90=ifort F90FLAGS="-O3 -i8 -I/opt/intel/composer_xe_2011_sp1.6.233/mkl/include" LDFLAGS=-nofor_main --with-fftw3=/home/sma/src/fftw-3.3.4/ --with-blas="-Wl,--start-group /opt/intel/composer_xe_2011_sp1.6.233/mkl/lib/intel64/libmkl_intel_ilp64.a /opt/intel/composer_xe_2011_sp1.6.233/mkl/lib/intel64/libmkl_core.a /opt/intel/composer_xe_2011_sp1.6.233/mkl/lib/intel64/libmkl_sequential.a -Wl,--end-group -lpthread -lm" --with-lapack="-Wl,--start-group /opt/intel/composer_xe_2011_sp1.6.233/mkl/lib/intel64/libmkl_intel_ilp64.a /opt/intel/composer_xe_2011_sp1.6.233/mkl/lib/intel64/libmkl_core.a /opt/intel/composer_xe_2011_sp1.6.233/mkl/lib/intel64/libmkl_sequential.a -Wl,--end-group -lpthread -lm"
 ```
 
 Lastly, `make clean`, `make`, and optionally `make install`. Binaries are located in `dpforexc/src/dp-5.3.99*`. You can add this to your PATH or make handy aliases like
 ```bash
-alias dp="/home/sma/dpforexc/src/dp-5.3.99"
-alias dpmpi="/home/sma/dpforexc/src/dp-5.3.99-mpi"
-alias broad="/home/sma/dpforexc/tool/broad"
+alias dp="$HOME/bin/bin/dp"
+alias dpmpi="$HOME/bin/bin/dp-5.3.99-mpi"
+alias dpopenmp="$HOME/bin/bin/dp-5.3.99-openmp"
+alias broad="$HOME/bin/bin/broad"
 ```
 
 To run the tests, you need to run `export F_UFMTENDIAN=big` to account for the endianness of the system. You can then run the tests with `make test` from the base directory, or just `make` in the `tests/` directory.
