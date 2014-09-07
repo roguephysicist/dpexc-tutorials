@@ -138,10 +138,14 @@ dp-openmp -i input.in -k kss_file.kss
 
 The first part of the DP Tutorial takes 20.64 seconds in sequential mode, 6.24 seconds using MPI, and 6.41 seconds using OpenMP.
 
-As I understand it, DP works fastest when running with OpenMP. When diagonalizing the Hamiltonian with the iterative Haydock scheme, OpenMP is also faster. Constructing the Hamiltonian with excitonic effects will be faster using MPI. OpenMP (with `export OMP_STACKSIZE=1M`) and you can calculate the memory usage with
+DP works fastest when running with OpenMP. It is also faster when diagonalizing the Hamiltonian with the iterative Haydock scheme. Constructing the Hamiltonian with excitonic effects will be faster using MPI. You can calculate the memory usage with
 ```
-(12x12x4x8x12)^2*8/1024
-(kpts * Nv * Nc)^2 * Bytes / 1024^(GB,MB,KB)
+(kx * ky * kz * nv * nc)^2 * 8 (Bytes) / 1024^(2[MB],3[GB],etc.)
+```
+
+For example,
+```
+(12x12x4x8x12)^2*8/1024^3 = 22 GB of memory.
 ```
 
 Nero install instructions
