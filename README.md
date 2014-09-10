@@ -136,6 +136,12 @@ export OMP_NUM_THREADS=12
 dp-openmp -i input.in -k kss_file.kss
 ```
 
+To check your stack size and other system defaults, you can run
+```bash
+ulimit -H -a (for hard-wired limits)
+ulimit -S -a (for soft-wired limits)
+```
+
 The first part of the DP Tutorial takes 20.64 seconds in sequential mode, 6.24 seconds using MPI, and 6.41 seconds using OpenMP.
 
 DP works fastest when running with OpenMP. It is also faster when diagonalizing the Hamiltonian with the iterative Haydock scheme. Constructing the Hamiltonian with excitonic effects will be faster using MPI. You can calculate the memory usage with
