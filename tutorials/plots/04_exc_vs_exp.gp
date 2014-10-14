@@ -58,9 +58,9 @@ unset label
 unset arrow
 set style increment default
 unset style line
-set style line 1  linetype 1 linecolor rgb "#6c71c4"  linewidth 3.500
+set style line 1  linetype 2 linecolor rgb "#6c71c4"  linewidth 3.500
 set style line 2  linetype 1 linecolor rgb "#859900"  linewidth 3.500
-set style line 3  linetype 2 linecolor rgb "#cb4b16"  linewidth 3.500
+set style line 3  linetype 1 linecolor rgb "#cb4b16"  linewidth 3.500
 set style line 4  linetype 1 linecolor rgb "#2aa198"  linewidth 3.500
 set style line 5  linetype 1 linecolor rgb "#dc322f"  linewidth 3.500
 set style line 6  linetype 1 linecolor rgb "#268bd2"  linewidth 3.500
@@ -117,7 +117,7 @@ set cbtics border in scale 1,0.5 mirror norotate  offset character 0, 0, 0 autoj
 set cbtics autofreq  norangelimit
 set rtics axis in scale 1,0.5 nomirror norotate  offset character 0, 0, 0 autojustify
 set rtics autofreq  norangelimit
-set title "Si Optical Apsorption, comparison between BSE and experiment" 
+set title "Si Optical Apsorption" 
 set title  offset character 0, 0, 0 font "" norotate
 set timestamp bottom 
 set timestamp "" 
@@ -163,7 +163,7 @@ set fontpath
 set psdir
 set fit noerrorvariables
 GNUTERM = "wxt"
-p "../exc02-exciton/noscissors.mdf" u 1:3 title "BSE $\\Sigma = 0$" w l ls 1,\
-  "../exc02-exciton/scissors.mdf" u 1:3 title "BSE $\\Sigma = 0.638 eV" w l ls 2,\
+p "../exc02-exciton/results_noscissors.mdf" u 1:3 title "BSE, no scissors" w l ls 1,\
+  "../exc02-exciton/results_scissors.mdf" u 1:3 title "BSE, $\\Sigma = 0.638$ eV" w l ls 2,\
   "eps_si.d.splined-0-9" u 1:3 title "Experiment" w l ls 3,\
 #    EOF
