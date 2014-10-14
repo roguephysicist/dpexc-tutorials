@@ -163,6 +163,7 @@ set fontpath
 set psdir
 set fit noerrorvariables
 GNUTERM = "wxt"
-p "../exc02-exciton/exc03_exc_outexc.mdf" u 1:3 title "BSE" w l ls 1,\
-  "eps_si.d.splined-0-9" u 1:3 title "Experiment" w l ls 2,\
+p "../exc02-exciton/noscissors.mdf" u 1:3 title "BSE $\\Sigma = 0$" w l ls 1,\
+  "../exc02-exciton/scissors.mdf" u 1:3 title "BSE $\\Sigma = 0.638 eV" w l ls 2,\
+  "eps_si.d.splined-0-9" u 1:3 title "Experiment" w l ls 3,\
 #    EOF
