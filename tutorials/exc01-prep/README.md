@@ -13,6 +13,7 @@ He−h=[(ε +∆ −ε +∆)δ ′ ′ +2<<v>>−<<W>>]
 ```
 
 with ∆n being the GW correction (or a scissor operator shift)
+
 ```latex
 << v >>= φv(r)φc(r)v(r,r′)φv′(r′)φc′(r′) and << W >>= φv(r)φv′(r)W(r,r′)φc(r′)φc′(r′)
 ```
@@ -45,7 +46,7 @@ Very important : for the time being, istwfk must be 1 for all the k-points in or
 Commands
 --------------------
 ```bash
-mpiexec -np 12 -env I_MPI_DEVICE rdssm  /home/sma/abinit-5.7.3_etsf/src/main/abinip < si_gen.files > si_gen.log; rm *_LOG* fort.7
+mpiexec -np 12 -env I_MPI_DEVICE rdssm  abinip < si_gen.files > si_gen.log; rm *_LOG* fort.7
 ```
 
 Questions
