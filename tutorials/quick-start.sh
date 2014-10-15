@@ -49,25 +49,25 @@ ln -sf ../exc01-prep/si1o_DS2_KSS si.kss
 ln -sf ../exc01-prep/si1o_DS3_SCR si.scr
 printf "\tEXC RPA calculation\n"
 dp-5.3.99-openmp -i exc01_rpa.in -k si_converged.kss > exc01_rpa.log
-mv out.exeig exc01_rpa_out.exeig
-mv out.exh exc01_rpa_out.exh
-mv outexc.mdf exc01_rpa_outexc.mdf
-mv outgwnlf.mdf exc01_rpa_outgwnlf.mdf
-mv outrpanlf.mdf exc01_rpa_outrpanlf.mdf
+mv out.exeig exc01-rpa_out.exeig
+mv out.exh exc01-rpa_out.exh
+mv outexc.mdf exc01-rpa_outexc.mdf
+mv outgwnlf.mdf exc01-rpa_outgwnlf.mdf
+mv outrpanlf.mdf exc01-rpa_outrpanlf.mdf
 printf "\tEXC GW-RPA calculation\n"
 dp-5.3.99-openmp -i exc02_gwrpa.in -k si_converged.kss > exc02_gwrpa.log
-mv out.exeig exc02_gwrpa_out.exeig
-mv out.exh exc02_gwrpa_out.exh
-mv outexc.mdf exc02_gwrpa_outexc.mdf
-mv outgwnlf.mdf exc02_gwrpa_outgwnlf.mdf
-mv outrpanlf.mdf exc02_gwrpa_outrpanlf.mdf
+mv out.exeig exc02-gwrpa_out.exeig
+mv out.exh exc02-gwrpa_out.exh
+mv outexc.mdf exc02-gwrpa_outexc.mdf
+mv outgwnlf.mdf exc02-gwrpa_outgwnlf.mdf
+mv outrpanlf.mdf exc02-gwrpa_outrpanlf.mdf
 printf "\tEXC full exciton calculation\n"
-dp-5.3.99-openmp -i exc03_exc.in -k si.kss -s si.scr > exc03_exc.log
-mv out.exeig exc03_exc_out.exeig
-mv out.exh exc03_exc_out.exh
-mv outexc.mdf exc03_exc_outexc.mdf
-mv outgwnlf.mdf exc03_exc_outgwnlf.mdf
-mv outrpanlf.mdf exc03_exc_outrpanlf.mdf
+dp-5.3.99-openmp -i exc03_exc.in -k si_converged.kss -s si.scr > exc03_exc.log
+mv out.exeig exc03-exc_out.exeig
+mv out.exh exc03-exc_out.exh
+mv outexc.mdf exc03-exc_outexc.mdf
+mv outgwnlf.mdf exc03-exc_outgwnlf.mdf
+mv outrpanlf.mdf exc03-exc_outrpanlf.mdf
 rm gmon.out *mem* *tree* *.kdotp* *.rhotw*
 cd ..
 

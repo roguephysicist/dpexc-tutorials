@@ -163,7 +163,7 @@ set fontpath
 set psdir
 set fit noerrorvariables
 GNUTERM = "wxt"
-p "../exc02-exciton/exc03_exc_outexc.mdf" u 1:3 title "BSE" w l ls 1,\
-  "../exc02-exciton/exc02_gwrpa_outexc.mdf" u 1:3 title "GW--RPA" w l ls 2,\
-  "../exc02-exciton/exc01_rpa_outexc.mdf" u 1:3 title "RPA" w l ls 3,\
+p "data/exc03-exc_outexc.mdf" u 1:3 title "BSE" w l ls 1,\
+  "data/exc02-gwrpa_outexc.mdf" u 1:3 title "GW--RPA" w l ls 2,\
+  "data/exc01-rpa_outexc.mdf" u 1:3 title "RPA" w l ls 3,\
 #    EOF

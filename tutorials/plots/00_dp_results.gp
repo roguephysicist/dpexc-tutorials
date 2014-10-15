@@ -164,9 +164,7 @@ set fontpath
 set psdir
 set fit noerrorvariables
 GNUTERM = "wxt"
-p "../dp03-alpha/ouclf.mdf" u 1:3 title "Long--range kernel w/scissors" w l ls 6,\
-  "../dp02-tdlda/ouclf.mdf" u 1:3 title "ALDA" w l ls 2,\
-  "../dp01-rpa_si/ouclf.mdf" u 1:3 title "RPA" w l ls 7,\
-#  "../dp03-alpha/ouclf_no_scissors.mdf" u ($1+0.65):3 title "Long--range kernel + rigid $\\Delta$" w l ls 3,\
-#  "../dp03-alpha/ouclf_no_scissors.mdf" u 1:3 title "Long--range kernel w/o scissors" w l ls 4,\
+p "data/dp03-alpha_ouclf.mdf" u 1:3 title "Long--range kernel w/scissors" w l ls 6,\
+  "data/dp02-tdlda_ouclf.mdf" u 1:3 title "ALDA" w l ls 2,\
+  "data/dp01-rpa_si_ouclf.mdf" u 1:3 title "RPA" w l ls 7,\
 #    EOF
