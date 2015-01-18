@@ -21,18 +21,7 @@ unset clip points
 set clip one
 unset clip two
 set bar 1.000000 front
-set border 31 front linetype -1 linewidth 1.000
-set timefmt z "%d/%m/%y,%H:%M"
-set zdata 
-set timefmt y "%d/%m/%y,%H:%M"
-set ydata 
-set timefmt x "%d/%m/%y,%H:%M"
-set xdata 
-set timefmt cb "%d/%m/%y,%H:%M"
-set timefmt y2 "%d/%m/%y,%H:%M"
-set y2data 
-set timefmt x2 "%d/%m/%y,%H:%M"
-set x2data 
+set border 31 front linetype -1 linewidth 1.000 
 set boxwidth
 set style fill  empty border
 set style rectangle back fc lt -3 fillstyle   solid 1.00 border lt -1
@@ -58,14 +47,14 @@ unset label
 unset arrow
 set style increment default
 unset style line
-set style line 1  linetype 1 linecolor rgb "#6c71c4"  linewidth 3.500
-set style line 2  linetype 1 linecolor rgb "#859900"  linewidth 3.500
-set style line 3  linetype 2 linecolor rgb "#cb4b16"  linewidth 3.500
-set style line 4  linetype 1 linecolor rgb "#2aa198"  linewidth 3.500
-set style line 5  linetype 1 linecolor rgb "#dc322f"  linewidth 3.500
-set style line 6  linetype 1 linecolor rgb "#268bd2"  linewidth 3.500
-set style line 7  linetype 1 linecolor rgb "#d33682"  linewidth 3.500
-set style line 8  linetype 1 linecolor rgb "#b58900"  linewidth 3.500
+set style line 1  dashtype 1 linecolor rgb "#6c71c4"  linewidth 3.500
+set style line 2  dashtype 1 linecolor rgb "#859900"  linewidth 3.500
+set style line 3  dashtype 2 linecolor rgb "#cb4b16"  linewidth 3.500
+set style line 4  dashtype 1 linecolor rgb "#2aa198"  linewidth 3.500
+set style line 5  dashtype 1 linecolor rgb "#dc322f"  linewidth 3.500
+set style line 6  dashtype 1 linecolor rgb "#268bd2"  linewidth 3.500
+set style line 7  dashtype 1 linecolor rgb "#d33682"  linewidth 3.500
+set style line 8  dashtype 1 linecolor rgb "#b58900"  linewidth 3.500
 unset style arrow
 set style histogram clustered gap 2 title  offset character 0, 0, 0
 unset logscale
