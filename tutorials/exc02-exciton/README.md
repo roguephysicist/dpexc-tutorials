@@ -27,7 +27,7 @@ Tasks
     1. What is the effect of the coupling on the absorption spectrum ?
     2. And what the effect on the eels (hint: generate smaller kss and scr files for the evaluation of the eels spectra, for the convergence parameters might imply long cal- culations)? (If you have no time to generate new kss files, use the ones included in the `/nfs_home/tutoadmin/spectroscopy lectures/work/Si` directory, but prior to calculation do `export F_UFMTENDIAN=big`).
 
-In the directories `∼/spectroscopy lectures/work/“other material”` input files for other simple semiconductors and insulators are available. Create the .kss and .scr with Abinit and try to obtain the absorption spectra (for example, try LiF).
+In the directories `~/spectroscopy lectures/work/"other material"` input files for other simple semiconductors and insulators are available. Create the .kss and .scr with Abinit and try to obtain the absorption spectra (for example, try LiF).
 
 Commands
 --------------------
@@ -35,7 +35,6 @@ Commands
 ln -s ../exc01-prep/si1o_DS2_KSS si.kss;\
 ln -s ../exc01-prep/si1o_DS5_KSS si_converged.kss;\
 ln -s ../exc01-prep/si1o_DS3_SCR si.scr;\
-export OMP_STACKSIZE=1G
 export OMP_NUM_THREADS=24
 dp-5.3.99-openmp -i exc01_rpa.in -k si_converged.kss > exc01_rpa.log;\
 mv out.exeig exc01_rpa_out.exeig;\
@@ -55,7 +54,7 @@ mv outexc.mdf exc02-gwrpa_outexc.mdf;\
 mv outgwnlf.mdf exc02-gwrpa_outgwnlf.mdf;\
 mv outrpanlf.mdf exc02-gwrpa_outrpanlf.mdf;\
 rm log* mem* tree*;\
-dp-5.3.99-openmp -i exc03_exc.in -k si_converged.kss -s si.scr > exc03_exc.log;\
+dp-5.3.99-openmp -i exc03_exc.in -k si.kss -s si.scr > exc03_exc.log;\
 mv out.exeig exc03-exc_out.exeig;\
 mv out.exh exc03-exc_out.exh;\
 mv out.kdotp exc03-exc_out.kdotp;\
