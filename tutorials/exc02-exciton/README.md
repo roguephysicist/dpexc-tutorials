@@ -35,7 +35,9 @@ Commands
 ln -s ../exc01-prep/si1o_DS2_KSS si.kss;\
 ln -s ../exc01-prep/si1o_DS5_KSS si_converged.kss;\
 ln -s ../exc01-prep/si1o_DS3_SCR si.scr;\
-mpiexec -np 12 -env I_MPI_DEVICE rdssm  dp-5.3.99-openmp -i exc01_rpa.in -k si_converged.kss > exc01_rpa.log;\
+export OMP_STACKSIZE=1G
+export OMP_NUM_THREADS=24
+dp-5.3.99-openmp -i exc01_rpa.in -k si_converged.kss > exc01_rpa.log;\
 mv out.exeig exc01_rpa_out.exeig;\
 mv out.exh exc01-rpa_out.exh;\
 mv out.kdotp exc01-rpa_out.kdotp;\
@@ -44,7 +46,7 @@ mv outexc.mdf exc01-rpa_outexc.mdf;\
 mv outgwnlf.mdf exc01-rpa_outgwnlf.mdf;\
 mv outrpanlf.mdf exc01-rpa_outrpanlf.mdf;\
 rm log* mem* tree*;\
-mpiexec -np 12 -env I_MPI_DEVICE rdssm  dp-5.3.99-openmp -i exc02_gwrpa.in -k si_converged.kss > exc02_gwrpa.log;\
+dp-5.3.99-openmp -i exc02_gwrpa.in -k si_converged.kss > exc02_gwrpa.log;\
 mv out.exeig exc02-gwrpa_out.exeig;\
 mv out.exh exc02-gwrpa_out.exh;\
 mv out.kdotp exc02-gwrpa_out.kdotp;\
@@ -53,7 +55,7 @@ mv outexc.mdf exc02-gwrpa_outexc.mdf;\
 mv outgwnlf.mdf exc02-gwrpa_outgwnlf.mdf;\
 mv outrpanlf.mdf exc02-gwrpa_outrpanlf.mdf;\
 rm log* mem* tree*;\
-mpiexec -np 12 -env I_MPI_DEVICE rdssm  dp-5.3.99-openmp -i exc03_exc.in -k si_converged.kss -s si.scr > exc03_exc.log;\
+dp-5.3.99-openmp -i exc03_exc.in -k si_converged.kss -s si.scr > exc03_exc.log;\
 mv out.exeig exc03-exc_out.exeig;\
 mv out.exh exc03-exc_out.exh;\
 mv out.kdotp exc03-exc_out.kdotp;\
