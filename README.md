@@ -85,7 +85,7 @@ With these librarires properly compiled you can proceed to configure the DP buil
 ./configure --prefix=$HOME/bin CC=icc --with-blas="-L/home/sma/src/lapack-3.5.0/ -lrefblas" --with-fftw3=/home/sma/src/fftw-3.3.4/ F90=ifort F90FLAGS="-O3 -g -pg -openmp" LDFLAGS=-nofor_main  --enable-openmp
 ```
 
-* and for [Intel® MKL](https://software.intel.com/en-us/articles/intel-mkl-link-line-advisor):
+* and for [Intel MKL](https://software.intel.com/en-us/articles/intel-mkl-link-line-advisor):
 ```bash
 ./configure --prefix=$HOME/bin CC=icc F90=ifort F90FLAGS="-O3 -i8 -I/opt/intel/composer_xe_2011_sp1.6.233/mkl/include" LDFLAGS=-nofor_main --with-fftw3=/home/sma/src/fftw-3.3.4/ --with-blas="-Wl,--start-group /opt/intel/composer_xe_2011_sp1.6.233/mkl/lib/intel64/libmkl_intel_ilp64.a /opt/intel/composer_xe_2011_sp1.6.233/mkl/lib/intel64/libmkl_core.a /opt/intel/composer_xe_2011_sp1.6.233/mkl/lib/intel64/libmkl_sequential.a -Wl,--end-group -lpthread -lm" --with-lapack="-Wl,--start-group /opt/intel/composer_xe_2011_sp1.6.233/mkl/lib/intel64/libmkl_intel_ilp64.a /opt/intel/composer_xe_2011_sp1.6.233/mkl/lib/intel64/libmkl_core.a /opt/intel/composer_xe_2011_sp1.6.233/mkl/lib/intel64/libmkl_sequential.a -Wl,--end-group -lpthread -lm"
 ```
@@ -100,40 +100,59 @@ alias broad="$HOME/bin/bin/broad"
 
 To run the tests, you need to run `export F_UFMTENDIAN=big` to account for the endianness of the system. You can then run the tests with `make test` from the base directory, or just `make` in the `tests/` directory.
 
+
+### Installing DP with the PETSc and SLEPc Libraries
+
+This version of DP is MPI enabled for parallelization. Version 3.4.3 of both the PETSc and SLEPc libraries are supported. To configure PETSc:
+
+```
+./configure --prefix=/home/sma/bin/petsc-3.4.3 --with-blas-lapack-dir=/home/intel/mkl/8.1.1 --with-cc=mpiicc --with-cxx=mpicxx --with-fc=mpiifort --with-scalar-type=complex --with-precision=single --with-fortran-kernels=generic --with-debugging=0
+```
+
+then follow the on-screen instructions. To install SLEPc, first export the following variables:
+
+```
+export PETSC_DIR=/home/sma/src/petsc-3.4.3
+export PETSC_ARCH=arch-linux2-c-opt
+export SLEPC_DIR=/home/sma/src/slepc-3.4.3
+```
+
+then follow the on-screen instructions. With those same variables exported, configure DP with
+
+```
+./configure --prefix=/home/sma/bin MPI_F90=mpiifort MPI_CC=mpiicc CC=icc F90=ifort F90FLAGS=-O2 LDFLAGS=-nofor_main --with-fftw3=/home/sma/src/fftw-3.3.4/ --with-blas='-L/home/sma/src/lapack-3.5.0/ -lrefblas' --enable-mpi --enable-slepc
+```
+
+then run `make clean`, `make`, and optionally `make install`.
+
+
 Running in Parallel
 --------------------
 Note that running with MPI across more nodes is better for some cases (diagonalization of the Hamiltonian, or others that benefit from parallelization), while using OpenMP on one node with many cores is better in other cases (excitonic calculations, or others that benefit from running entirely in RAM). You need to select the best method and tailor it to suit your calculation.
-
-An MPD ring needs to be open before running in parallel on *Medusa* using MPI. This can be done for one node by running
-```bash
-mpdboot -v -r ssh -f NODE -n 1
-```
 
 The MPD ring needs to be closed after the calculation by executing `mpdallexit`.
 
 ### ABINIT in Parallel
 Running ABINIT in parallel can be done once the ring is open. For example,
 ```bash
-mpiexec -np 12 -env I_MPI_DEVICE rdssm  /home/sma/abinit-5.7.3_etsf/src/main/abinip < input.files > output.log
+mpiexec.hydra -np 12 abinip < input.files > output.log
 ```
 
 allows you to run on 12 cores using MPI. You don't need to explicitely state the full path to the binary if it is in your PATH.
 
 For the last part of the ABINIT GW tutorial, running on 12 cores takes 432.3 seconds running on one core, 109.7 seconds running in on ten cores and 125.2 seconds running on four. Calculation speed does not increase linearly with the number of cores or processors.
 
-### Running DP in parallel
+### DP/EXC in parallel
 We can run DP/EXC in parallel via MPI,
 ```bash
-mpiexec -np 12 -env I_MPI_DEVICE rdssm  /home/sma/dpforexc/src/dp-5.3.99-mpi -i input.in -k kss_file.kss
+mpiexec.hydra -np 12 dp-5.3.99-mpi -i input.in -k kss_file.kss -s scr_file.scr
 
 ```
 
 or OpenMP,
 ```bash
-ulimit -s unlimited
-export OMP_STACKSIZE=1G
 export OMP_NUM_THREADS=12
-dp-openmp -i input.in -k kss_file.kss
+dp-5.3.99-openmp -i input.in -k kss_file.kss -s scr_file.scr
 ```
 
 To check your stack size and other system defaults, you can run
