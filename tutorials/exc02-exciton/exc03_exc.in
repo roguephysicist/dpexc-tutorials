@@ -32,4 +32,4 @@ broad  0.075 # Lorentzian broadening
 # Scissor operator in eV
 soenergy 0.638
 
-verboselevel 3 # this puts the verbosity level to ’high’ (lowest is 0)
+verboselevel 3 # this puts the verbosity level to 'high' (lowest is 0)

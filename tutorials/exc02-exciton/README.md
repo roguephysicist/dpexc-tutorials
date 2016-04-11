@@ -25,7 +25,7 @@ Tasks
 * Finally perform an exciton calculation (still using a scissor if you wish). Plot the spectra and consider again the three files outexc.mdf outrpanlf.mdf outgwnlf.mdf
 * Perform a calculation including coupling (i.e. using the variable coupling).
     1. What is the effect of the coupling on the absorption spectrum ?
-    2. And what the effect on the eels (hint: generate smaller kss and scr files for the evaluation of the eels spectra, for the convergence parameters might imply long cal- culations)? (If you have no time to generate new kss files, use the ones included in the `/nfs_home/tutoadmin/spectroscopy lectures/work/Si` directory, but prior to calculation do `export F_UFMTENDIAN=big`).
+    2. And what the effect on the eels (hint: generate smaller kss and scr files for the evaluation of the eels spectra, for the convergence parameters might imply long calculations)? (If you have no time to generate new kss files, use the ones included in the `/nfs_home/tutoadmin/spectroscopy lectures/work/Si` directory, but prior to calculation do `export F_UFMTENDIAN=big`).
 
 In the directories `~/spectroscopy lectures/work/"other material"` input files for other simple semiconductors and insulators are available. Create the .kss and .scr with Abinit and try to obtain the absorption spectra (for example, try LiF).
 
