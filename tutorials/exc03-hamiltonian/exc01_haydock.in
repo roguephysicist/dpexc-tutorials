@@ -1,8 +1,6 @@
 exciton    # excitonic calculation (the EXC code) in transition space
-rpa        # RPA calculation
+exc        # full exciton calculation, requires screening file with -s option
 so         # allows use of scissory correction specified by soenergy
-shiftk     # symmetries are not used for shifted k-point sets
-           # inversion is not used
 
 # The choice of G-shells is still possible both using npwmat or matsh
 #npwmat  59

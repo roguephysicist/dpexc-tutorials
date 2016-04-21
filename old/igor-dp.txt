@@ -1,0 +1,32 @@
+Hi!
+
+I've started a post-doc at EPFL, in Lausanne, all is going on fine. 
+
+About the petsc\slepc - here is the typical configure line for the PETSc
+installation:
+
+./configure --with-blas-lib="-L/share/apps/env_ifort2011_openmpi/lib -lblas" --with-lapack-lib="-L/share/apps/env_ifort2011_openmpi/lib -llapack" F90FLAGS="-convert big_endian" COPTFLAGS='-O3 -shared-intel' FOPTFLAGS='-O3 -shared-intel' CXXOPTFLAGS='-03 -shared-intel' --with-scalar-type=complex --with-precision=single --with-debugging=0 --with-fortran-kernels=generic
+
+The most important part are obviously the flags:
+--with-scalar-type=complex
+--with-precision=single
+--with-debugging=0
+--with-fortran-kernels=generic
+
+SLEPc then just picks up the config from PETSc.
+
+The version you need is PETSc 3.4.3 and SLEPc 3.4.3. I haven't tested it for
+other versions.
+
+It is usually usefull to have the variables responsible for these libraries
+directly in you invirenment:
+
+e.g.
+export PETSC_DIR=/home/reshetnyak/Work/petsc-3.4.3
+export PETSC_ARCH=arch-linux2-c-debug
+export SLEPC_DIR=/home/reshetnyak/Work/slepc-3.4.3
+
+When you install dp you need to specify --enable-slepc
+
+When you run - you will need to put diag_para in the *.in file, to make sure it
+does the MPI diagonalization.

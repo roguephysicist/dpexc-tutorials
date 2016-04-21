@@ -72,8 +72,8 @@ Plot the imaginary part and the real part of the dielectric function of silicon 
 Try to change the artificial broadening of the spectrum using the utility "broad": 
  
 ```bash
- broad outlf.mdf  
-````
+broad outlf.mdf
+```
 
 A reasonable broadening is usually about 0.1-0.2 eV.
 

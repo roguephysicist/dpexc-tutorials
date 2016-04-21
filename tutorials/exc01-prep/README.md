@@ -46,7 +46,7 @@ Very important : for the time being, istwfk must be 1 for all the k-points in or
 Commands
 --------------------
 ```bash
-mpiexec -np 12 -env I_MPI_DEVICE rdssm  abinip < si_gen.files > si_gen.log; rm *_LOG* fort.7
+mpiexec.hydra -np 12 abinip < si_gen.files > si_gen.log; rm *_LOG* fort.7
 ```
 
 Questions

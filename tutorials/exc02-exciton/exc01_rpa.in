@@ -30,4 +30,4 @@ domega 0.01 # delta \omega
 # using the tool "broad"
 broad  0.075 # Lorentzian broadening
 
-verboselevel 3 # this puts the verbosity level to ’high’ (lowest is 0)
+verboselevel 3 # this puts the verbosity level to 'high' (lowest is 0)
