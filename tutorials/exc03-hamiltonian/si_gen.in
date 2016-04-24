@@ -5,16 +5,16 @@
 # Dataset 3: calculation of the screening (epsilon^-1 matrix for W)
 # Dataset 4: calculation of the Self-Energy matrix elements (GW corrections)
 
-prtvol   -1
+#prtvol   -1
 
 ndtset    4
 
 kptopt    1            # Option for the automatic generation of k points
-ngkpt     8 8 8        # Density of k points
+ngkpt     7 7 7        # Density of k points
 
 # Dataset1: usual self-consistent ground-state calculation
 # Definition of the k-point grid
-nkpt1     10
+nkpt1     44
 nshiftk1  4
 shiftk1   0.5 0.5 0.5  # This grid is the most economical
           0.5 0.0 0.0
@@ -25,22 +25,22 @@ prtden1   1            # Print out density
 
 # Dataset2: calculation of kss file
 # Definition of k-points
-#nkpt2    19           # A set of 19 k-points containing Gamma
+nkpt2     60           # A set of 19 k-points containing Gamma
 nshiftk2  4
 shiftk2   0.0 0.0 0.0  # This grid contains the Gamma point
           0.0 0.5 0.5
           0.5 0.0 0.5
           0.5 0.5 0.0
-istwfk2  *1            # Option needed for Gamma
+istwfk2   60*1            # Option needed for Gamma
 iscf2    -2            # Non self-consistent calculation
 getden2  -1            # Read previous density file
-nband2    50
-nbandkss2 45           # Number of bands to store in KSS file
+nband2    30
+nbandkss2 15           # Number of bands to store in KSS file
 
 # Dataset3: Calculation of the screening (epsilon^-1 matrix)
 optdriver3  3        # Screening calculation
 getkss3    -1        # Obtain KSS file from previous dataset
-nband3      45       # Bands to be used in the screening calculation
+nband3      15       # Bands to be used in the screening calculation
 ecutwfn3    3.6      # Planewaves to be used to represent the wavefunctions
 ecuteps3    6.0      # Dimension of the screening matrix
 ppmfrq3     16.7 eV  # Imaginary frequency where to calculate the screening
@@ -49,7 +49,7 @@ shiftk3  0.0 0.0 0.0  # This grid contains the Gamma point
          0.0 0.5 0.5  # IMPORTANT NOTE: we have to use the same k-mesh
          0.5 0.0 0.5  # as that reported in the KSS file otherwise the code stops!
          0.5 0.5 0.0
-istwfk3  *1                    
+istwfk3     60*1                    
 
 # Dataset4: Calculation of the Self-Energy matrix elements (GW corrections)
 optdriver4  4       # Self-Energy calculation
@@ -63,12 +63,12 @@ nkptgw4     1                # number of k-point where to calculate the GW corre
 kptgw4                       # k-points
   0.000    0.000    0.000    # (Gamma)
 bdgw4       4  5             # calculate GW corrections for bands from 4 to 5
-nshiftk4  4
+nshiftk4    4
 shiftk4  0.0 0.0 0.0  # This grid contains the Gamma point
          0.0 0.5 0.5  # IMPORTANT NOTE: we have to use the same k-mesh
          0.5 0.0 0.5  # as that reported in the KSS file otherwise the code stops!
          0.5 0.5 0.0
-istwfk4  *1
+istwfk4     60*1
                
 # Definition of the unit cell: fcc
 acell  3*10.217        # This is equivalent to   10.217 10.217 10.217

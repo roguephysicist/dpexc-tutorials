@@ -1,6 +1,6 @@
 si_gen.in
 si_gen.out
-si1i
-si1o
-si1
+si_i
+si_o
+si
 ../psps/14si.pspnc

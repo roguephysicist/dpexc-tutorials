@@ -1,0 +1,24 @@
+                                                                 mem1        mem2         total          just allocated
+                                                             __________________________________________________________
+                                           input file read =       34 +         0 =        34 kb --> 
+                                             vkb allocated =       45 +       200 =       245 kb -->          397.97
+                                            vkbd allocated =       45 +       400 =       445 kb -->          397.97
+                                kss file read (but no wfg) =       49 +       400 =       449 kb --> 
+                                       screening allocated =       49 +      2032 =      2081 kb --> 
+                                       screening file read =       49 +      2032 =      2081 kb --> 
+                                           igfft allocated =      184 +      2032 =      2216 kb --> 
+                                           ktabr allocated =      367 +     57768 =     58135 kb -->        27635.62
+                                        gwenergy allocated =      586 +    175836 =    176422 kb -->            3.75
+                         (prep_trans) transition allocated =      948 +    177124 =    178072 kb --> 
+                                        wf_count allocated =      949 +    177124 =    178073 kb --> 
+                                           after leggi_wfg =      949 +    178056 =    179005 kb -->            0.00
+                                    fnl and fnld allocated =      949 +    187608 =    188557 kb -->         9551.25
+                    (calcola_comm) tr%rhotwxqpol allocated =      969 +    189152 =    190121 kb -->         1543.50
+                                             wfr allocated =      929 +    195324 =    196253 kb --> 
+                                           wfg deallocated =      929 +    194392 =    195321 kb --> 
+                             beginning of creation exciton =      926 +    210516 =    211442 kb --> 
+                                        rhxtwg_t allocated =      927 +    225696 =    226623 kb --> 
+                                        rhxtwg_q allocated =     3219 +    323420 =    326639 kb --> 
+                                          excham allocated =     3186 +    405544 =    408730 kb -->      8470728.00
+                       end creation exciton - deallocation =      501 +    156352 =    156853 kb --> 
+                                                 end of dp =      236 +     71396 =     71632 kb --> 

@@ -9,8 +9,5 @@
 *_GW
 *_SGR
 *_SIG
-*.exeig
-*.exh
-*.kdotp*
-*.rhotw
+out.*
 fort.*

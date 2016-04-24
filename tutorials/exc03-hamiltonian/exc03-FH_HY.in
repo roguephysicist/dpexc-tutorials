@@ -1,0 +1,35 @@
+exciton     # excitonic calculation (the EXC code) in transition space
+exc         # full exciton calculation, requires screening file with -s option
+so          # allows use of scissor correction specified by soenergy
+coupling    # creates the full excitonic Hamiltonian, no longer Tamm-Dancoff
+haydock     # iterative inversion of the excitonic Hamiltonian
+
+# The choice of G-shells is still possible both using npwmat or matsh
+matsh 6     # number of shells of G-vectors for the \epsilon matrix
+wfnsh 15    # number of shells of plane waves to describe the wavefunctions
+
+# Another parameter to converge is the number of bands to include in the construction of \chi_0
+nbands  8   # number of the last band
+lomo 2      # number of the first band
+
+# In the case of optical absorption the value of the 
+# perturbation wavevector q is 0
+# DP considers automatically 6 different polarization directions 
+# (3 Cartesian axis and 3 reciprocal lattice vector directions)
+q
+0.0 0.0 0.0 # q [reduced coordinates] (if q is exactly 0 -> 6 pol)
+
+# Frequency range of interest in eV
+omegai 0.0  # initial frequency
+omegae 7.0  # last frequency
+domega 0.01 # delta \omega
+
+# Broadening of the curve: it is usually advised to use a small
+# broadening here (0.01 eV) and add more broadening in a second time
+# using the tool "broad"
+broad  0.075 # Lorentzian broadening
+
+# Scissor operator in eV
+soenergy 0.638
+
+verboselevel 3 # this puts the verbosity level to 'high' (lowest is 0)

@@ -1,0 +1,23 @@
+                                                                 mem1        mem2         total     proc         just allocated
+                                                             __________________________________________________________________
+                                           input file read =      493 +      1744 =      2237 kb (proc   0)
+                                             vkb allocated =      504 +      1944 =      2448 kb (proc   0) -->          397.97
+                                            vkbd allocated =      504 +      2144 =      2648 kb (proc   0) -->          397.97
+                                kss file read (but no wfg) =      508 +      2144 =      2652 kb (proc   0)
+                                       screening allocated =      509 +      3776 =      4285 kb (proc   0)
+                                       screening file read =      509 +      3776 =      4285 kb (proc   0)
+                                           igfft allocated =      647 +      3776 =      4423 kb (proc   0)
+                                           ktabr allocated =      830 +     59512 =     60342 kb (proc   0) -->        27635.62
+                                        gwenergy allocated =     1052 +    177580 =    178632 kb (proc   0) -->            3.75
+                         (prep_trans) transition allocated =     1415 +    178868 =    180283 kb (proc   0)
+                                        wf_count allocated =     1415 +    178868 =    180283 kb (proc   0)
+                                           after leggi_wfg =     1442 +    180552 =    181994 kb (proc   0) -->            0.00
+                                             wfr allocated =     1412 +    198220 =    199632 kb (proc   0)
+                                           wfg deallocated =     1412 +    197288 =    198700 kb (proc   0)
+                             beginning of creation exciton =     1408 +    213412 =    214820 kb (proc   0)
+                       end creation exciton - deallocation =      953 +     78756 =     79709 kb (proc   0)
+                                    beginning of diago ham =      691 +     78756 =     79447 kb (proc   0)
+                                          H read from file =    98109 +    160880 =    258989 kb (proc   0)
+                                    Before launching slepc =    98112 +    123004 =    221116 kb (proc   0)
+                               end diagoham - deallocation =   111164 +     78756 =    189920 kb (proc   0)
+                                                 end of dp =   111161 +     75924 =    187085 kb (proc   0)

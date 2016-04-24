@@ -1,11 +1,11 @@
-exciton    # excitonic calculation (the EXC code) in transition space
-exc        # full exciton calculation, requires screening file with -s option
-so         # allows use of scissory correction specified by soenergy
+exciton     # excitonic calculation (the EXC code) in transition space
+exc         # full exciton calculation, requires screening file with -s option
+so          # allows use of scissor correction specified by soenergy
+coupling    # creates the full excitonic Hamiltonian, no longer Tamm-Dancoff
+diag_para   # parallel diagonalization of the excitonic Hamiltonian using MPI
 
 # The choice of G-shells is still possible both using npwmat or matsh
-#npwmat  59
 matsh 6     # number of shells of G-vectors for the \epsilon matrix
-#npwwfn 283
 wfnsh 15    # number of shells of plane waves to describe the wavefunctions
 
 # Another parameter to converge is the number of bands to include in the construction of \chi_0
