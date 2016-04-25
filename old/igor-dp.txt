@@ -30,3 +30,7 @@ When you install dp you need to specify --enable-slepc
 
 When you run - you will need to put diag_para in the *.in file, to make sure it
 does the MPI diagonalization.
+
+For stopping the calculation - diag_no. Then you should link the output files
+out.exh, out.antiexh, .. to in.exh, in.antiexh etc. If DP discovers their
+presence - it reads them automatically.
