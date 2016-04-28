@@ -1,0 +1,460 @@
+ begin dp
+ |--begin read_structure
+ |**|--begin testlda
+ |**|**|--begin rdhdr
+ |**|**|**|--begin setup_symmetry
+ |**|**|**|--end setup_symmetry
+ |**|**|--end rdhdr
+ |**|--end testlda
+ |**|--begin testscr
+ |**|--end testscr
+ |**|--begin testvar
+ |**|--end testvar
+ |**|--begin print_parameters
+ |**|--end print_parameters
+ |**|--begin rdkss
+ |**|**|--begin rdhdr
+ |**|**|**|--begin setup_symmetry
+ |**|**|**|--end setup_symmetry
+ |**|**|--end rdhdr
+ |**|**|--begin pdhdr
+ |**|**|--end pdhdr
+ |**|**|--begin print_symmetry
+ |**|**|--end print_symmetry
+ |**|--end rdkss
+ |**|--begin rdscr
+ |**|--end rdscr
+ |--end read_structure
+ |--begin setmesh
+ |--end setmesh
+ |--begin surot
+ |--end surot
+ |--begin identk
+ |--end identk
+ |--begin lattice
+ |--end lattice
+ |--begin qpol_and_q
+ |**|--begin fixqpol
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|--end fixqpol
+ |**|--begin findshells
+ |**|--end findshells
+ |**|--begin build_qibz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|**|--begin reduceto1bz
+ |**|**|--end reduceto1bz
+ |**|--end build_qibz
+ |**|--begin identq
+ |**|--end identq
+ |**|--begin checkqpol
+ |**|--end checkqpol
+ |**|--begin clcqpg
+ |**|--end clcqpg
+ |**|--begin qtabg0
+ |**|--end qtabg0
+ |--end qpol_and_q
+ |--begin quasiparticles
+ |--end quasiparticles
+ |--begin fermi
+ |**|--begin EFermi_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|**|--begin Emax_occ_T0
+ |**|**|--end Emax_occ_T0
+ |**|--end EFermi_occ_T0
+ |--end fermi
+ |--begin set_qvecs2cycle
+ |--end set_qvecs2cycle
+ |--begin creation_tablekp
+ |--end creation_tablekp
+ |--begin get_dim_trans
+ |--end get_dim_trans
+ |--begin prep_trans
+ |**|--begin allocate_omega
+ |**|--end allocate_omega
+ |--end prep_trans
+ |--begin leggi_wfg
+ |**|--begin test_orthonorm
+ |**|--end test_orthonorm
+ |--end leggi_wfg
+ |--begin calccomm
+ |**|--begin cfnl
+ |**|--end cfnl
+ |--end calccomm
+ |--begin fftwfn
+ |--end fftwfn
+ |--begin createVc
+ |--end createVc
+ |--begin creation_exciton
+ |**|--begin blocks
+ |**|--end blocks
+ |**|--begin handling_files
+ |**|--end handling_files
+ |**|--begin create_rhotwt
+ |**|--end create_rhotwt
+ |**|--begin createVc_ibz
+ |**|--end createVc_ibz
+ |**|--begin create_W
+ |**|--end create_W
+ |**|--begin create_tablekmkp
+ |**|--end create_tablekmkp
+ |**|--begin create_rhotwq0
+ |**|--end create_rhotwq0
+ |**|--begin coulombterm
+          loop in coulombterm started
+           done    5 % in      19.43 seconds - time expected to complete loop:    388.64 seconds
+           done   10 % in      38.88 seconds - time expected to complete loop:    388.80 seconds
+           done   15 % in      58.36 seconds - time expected to complete loop:    389.07 seconds
+           done   20 % in      77.79 seconds - time expected to complete loop:    388.95 seconds
+           done   25 % in      97.23 seconds - time expected to complete loop:    388.91 seconds
+           done   30 % in     116.66 seconds - time expected to complete loop:    388.87 seconds
+           done   35 % in     136.10 seconds - time expected to complete loop:    388.84 seconds
+           done   40 % in     155.56 seconds - time expected to complete loop:    388.89 seconds
+           done   45 % in     175.03 seconds - time expected to complete loop:    388.95 seconds
+           done   50 % in     194.49 seconds - time expected to complete loop:    388.98 seconds
+           done   55 % in     213.93 seconds - time expected to complete loop:    388.97 seconds
+           done   60 % in     233.43 seconds - time expected to complete loop:    389.05 seconds
+           done   65 % in     252.89 seconds - time expected to complete loop:    389.06 seconds
+           done   70 % in     272.30 seconds - time expected to complete loop:    389.01 seconds
+           done   75 % in     291.72 seconds - time expected to complete loop:    388.96 seconds
+           done   80 % in     311.14 seconds - time expected to complete loop:    388.92 seconds
+           done   85 % in     330.56 seconds - time expected to complete loop:    388.90 seconds
+           done   90 % in     349.96 seconds - time expected to complete loop:    388.85 seconds
+           done   95 % in     369.33 seconds - time expected to complete loop:    388.77 seconds
+           done  100 % in     388.42 seconds - time expected to complete loop:    388.42 seconds
+          loop in coulombterm completed
+ |**|**|--begin exchangeterm
+          loop in exchangeterm started
+           done    5 % in       0.08 seconds - time expected to complete loop:      1.68 seconds
+           done   10 % in       0.17 seconds - time expected to complete loop:      1.67 seconds
+           done   15 % in       0.25 seconds - time expected to complete loop:      1.67 seconds
+           done   20 % in       0.33 seconds - time expected to complete loop:      1.67 seconds
+           done   25 % in       0.42 seconds - time expected to complete loop:      1.68 seconds
+           done   30 % in       0.50 seconds - time expected to complete loop:      1.68 seconds
+           done   35 % in       0.59 seconds - time expected to complete loop:      1.68 seconds
+           done   40 % in       0.67 seconds - time expected to complete loop:      1.69 seconds
+           done   45 % in       0.76 seconds - time expected to complete loop:      1.69 seconds
+           done   50 % in       0.85 seconds - time expected to complete loop:      1.69 seconds
+           done   55 % in       0.93 seconds - time expected to complete loop:      1.70 seconds
+           done   60 % in       1.02 seconds - time expected to complete loop:      1.70 seconds
+           done   65 % in       1.11 seconds - time expected to complete loop:      1.71 seconds
+           done   70 % in       1.20 seconds - time expected to complete loop:      1.72 seconds
+           done   75 % in       1.29 seconds - time expected to complete loop:      1.72 seconds
+           done   80 % in       1.39 seconds - time expected to complete loop:      1.73 seconds
+           done   85 % in       1.48 seconds - time expected to complete loop:      1.75 seconds
+           done   90 % in       1.59 seconds - time expected to complete loop:      1.76 seconds
+           done   95 % in       1.69 seconds - time expected to complete loop:      1.78 seconds
+           done  100 % in       1.86 seconds - time expected to complete loop:      1.86 seconds
+          loop in exchangeterm completed
+ |**|**|--end exchangeterm
+ |**|**|--begin diagoterm
+ |**|**|--end diagoterm
+ |**|--end creation_exciton
+ |**|--begin haydock_scheme
+ |**|**|--begin haydock
+          loop in haydock started
+           done    5 % in       3.62 seconds - time expected to complete loop:     72.50 seconds
+           done   10 % in       7.02 seconds - time expected to complete loop:     70.21 seconds
+           done   15 % in      10.43 seconds - time expected to complete loop:     69.53 seconds
+           done   20 % in      13.86 seconds - time expected to complete loop:     69.28 seconds
+           done   25 % in      17.27 seconds - time expected to complete loop:     69.10 seconds
+           done   30 % in      20.61 seconds - time expected to complete loop:     68.71 seconds
+           done   35 % in      24.12 seconds - time expected to complete loop:     68.91 seconds
+           done   40 % in      27.51 seconds - time expected to complete loop:     68.77 seconds
+           done   45 % in      31.12 seconds - time expected to complete loop:     69.16 seconds
+           done   50 % in      34.55 seconds - time expected to complete loop:     69.10 seconds
+           done   55 % in      37.98 seconds - time expected to complete loop:     69.05 seconds
+           done   60 % in      41.41 seconds - time expected to complete loop:     69.02 seconds
+           done   65 % in      44.63 seconds - time expected to complete loop:     68.66 seconds
+           done   70 % in      48.70 seconds - time expected to complete loop:     69.57 seconds
+           done   75 % in      52.44 seconds - time expected to complete loop:     69.93 seconds
+           done   80 % in      55.78 seconds - time expected to complete loop:     69.72 seconds
+           done   85 % in      59.00 seconds - time expected to complete loop:     69.42 seconds
+           done   90 % in      62.44 seconds - time expected to complete loop:     69.38 seconds
+           done   95 % in      65.96 seconds - time expected to complete loop:     69.43 seconds
+          loop in haydock completed
+ |**|**|--end haydock
+ |**|**|--begin haydock
+          loop in haydock started
+           done    5 % in       3.71 seconds - time expected to complete loop:     74.16 seconds
+           done   10 % in       7.03 seconds - time expected to complete loop:     70.28 seconds
+           done   15 % in      10.33 seconds - time expected to complete loop:     68.86 seconds
+           done   20 % in      13.85 seconds - time expected to complete loop:     69.25 seconds
+           done   25 % in      17.27 seconds - time expected to complete loop:     69.10 seconds
+           done   30 % in      20.78 seconds - time expected to complete loop:     69.26 seconds
+           done   35 % in      24.21 seconds - time expected to complete loop:     69.16 seconds
+           done   40 % in      27.82 seconds - time expected to complete loop:     69.55 seconds
+           done   45 % in      31.26 seconds - time expected to complete loop:     69.46 seconds
+           done   50 % in      34.60 seconds - time expected to complete loop:     69.20 seconds
+           done   55 % in      38.30 seconds - time expected to complete loop:     69.64 seconds
+           done   60 % in      41.85 seconds - time expected to complete loop:     69.75 seconds
+           done   65 % in      45.25 seconds - time expected to complete loop:     69.62 seconds
+           done   70 % in      48.84 seconds - time expected to complete loop:     69.76 seconds
+           done   75 % in      52.29 seconds - time expected to complete loop:     69.72 seconds
+           done   80 % in      55.84 seconds - time expected to complete loop:     69.80 seconds
+           done   85 % in      59.15 seconds - time expected to complete loop:     69.59 seconds
+           done   90 % in      62.59 seconds - time expected to complete loop:     69.55 seconds
+           done   95 % in      66.21 seconds - time expected to complete loop:     69.70 seconds
+          loop in haydock completed
+ |**|**|--end haydock
+ |**|**|--begin haydock
+          loop in haydock started
+           done    5 % in       3.39 seconds - time expected to complete loop:     67.76 seconds
+           done   10 % in       7.11 seconds - time expected to complete loop:     71.11 seconds
+           done   15 % in      10.56 seconds - time expected to complete loop:     70.39 seconds
+           done   20 % in      14.14 seconds - time expected to complete loop:     70.72 seconds
+           done   25 % in      17.60 seconds - time expected to complete loop:     70.41 seconds
+           done   30 % in      20.87 seconds - time expected to complete loop:     69.58 seconds
+           done   35 % in      24.21 seconds - time expected to complete loop:     69.18 seconds
+           done   40 % in      27.59 seconds - time expected to complete loop:     68.99 seconds
+           done   45 % in      31.02 seconds - time expected to complete loop:     68.94 seconds
+           done   50 % in      34.44 seconds - time expected to complete loop:     68.88 seconds
+           done   55 % in      37.77 seconds - time expected to complete loop:     68.66 seconds
+           done   60 % in      41.12 seconds - time expected to complete loop:     68.54 seconds
+           done   65 % in      44.58 seconds - time expected to complete loop:     68.59 seconds
+           done   70 % in      47.86 seconds - time expected to complete loop:     68.38 seconds
+           done   75 % in      51.64 seconds - time expected to complete loop:     68.85 seconds
+           done   80 % in      55.15 seconds - time expected to complete loop:     68.93 seconds
+           done   85 % in      58.80 seconds - time expected to complete loop:     69.18 seconds
+           done   90 % in      62.33 seconds - time expected to complete loop:     69.25 seconds
+           done   95 % in      65.67 seconds - time expected to complete loop:     69.12 seconds
+          loop in haydock completed
+ |**|**|--end haydock
+ |**|--end haydock_scheme
+ |**|--begin checks
+ |**|--end checks
+ |--end dp
