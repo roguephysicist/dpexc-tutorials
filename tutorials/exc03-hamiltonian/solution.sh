@@ -1,60 +1,87 @@
 #!/bin/bash
-# solution.sh
-ABINIP="/home/sma/bin-2013/abinit-5.7.3/abinit/5.7/bin/abinip"
-EXC_OMP="/home/sma/bin-2013/dp-5.2.99-r1883/bin/dp-5.3.99-openmp"
-EXC_MPI="/home/sma/bin-2013/dp-5.2.99-r1883/bin/dp-5.3.99-mpi"
+# Simple Si test cases for testing different features of DP/EXC
 
-# Creating the KSS and SCR files with ABINIT
-mpiexec.hydra -np 24 $ABINIP < si_gen.files 2>&1 | tee si_gen.log
-rm *_LOG_* fort.7
-mkdir -p KSS_SCR
-mv si_o_* KSS_SCR/
-mv si_gen.out KSS_SCR/
-mv si_gen.log KSS_SCR/
-ln -sf KSS_SCR/si_o_DS2_KSS si.kss
-ln -sf KSS_SCR/si_o_DS3_SCR si.scr
+# Program binaries
+ABINIP="/opt/science/bin/abinit-5.7.3_etsf-intel13.1.117/bin/abinip"
+EXC_OMP="/opt/science/bin/dp-5.2.99-r1883-intel13.1.117/bin/dp-5.3.99-openmp"
+EXC_MPI="/opt/science/bin/dp-5.2.99-r1883-intel13.1.117/bin/dp-5.3.99-mpi"
+BROAD="/opt/science/bin/dp-5.2.99-r1883-intel13.1.117/bin/broad"
 
 # Necessary OMP variables
 export OMP_STACKSIZE=1G
 export OMP_NUM_THREADS=64
 
-# Tamm-Dancoff, full diagonalization, serial (very long!)
-CASE1="exc01-TD_FD"
-mkdir -p ${CASE1}
-$EXC_OMP -i ${CASE1}.in -k si.kss -s si.scr 2>&1 | tee ${CASE1}.out
-mv mem tree out* ${CASE1}.out ${CASE1}/
+abinit_mpi () {
+    local CASE=${1}
+    mkdir -p ${CASE}
+    mpiexec.hydra -np 12 $ABINIP < ${CASE}.files 2>&1 | tee ${CASE}.log
+    rm *_LOG_* fort.7
+    mv si_o_* ${CASE}
+    mv ${CASE}.out ${CASE}
+    mv ${CASE}.log ${CASE}
+}
 
-# Tamm-Dancoff, Haydock diagonalization, parallel
-CASE2="exc02-TD_HY"
-mkdir -p ${CASE2}
-$EXC_OMP -i ${CASE2}.in -k si.kss -s si.scr 2>&1 | tee ${CASE2}.out
-mv mem tree out* ${CASE2}.out ${CASE2}/
+broad () {
+    local FILE=${1}
+    local AMOUNT=${2}
+    printf "0\n0\n0\n${AMOUNT}\n" | ${BROAD} ${FILE}
+    echo
+}
 
-# Coupling, Haydock diagonalization, parallel
-CASE3="exc03-FH_HY"
-mkdir -p ${CASE3}
-$EXC_OMP -i ${CASE3}.in -k si.kss -s si.scr 2>&1 | tee ${CASE3}.out
-mv mem tree out* ${CASE3}.out ${CASE3}/
+exc_openmp () {
+    local CASE=${1}
+    mkdir -p ${CASE}
+    $EXC_OMP -i ${CASE}.in -k si.kss -s si.scr 2>&1 | tee ${CASE}.out
+    if [ -e "outexc.mdf" ]; then broad outexc.mdf 0.05; fi
+    mv mem tree out* ${CASE}.out ${CASE}/
+}
 
-# Coupling, full diagonalization, parallel (stage 1, creation of the hamiltonian)
-CASE4a="exc04a-FH_FD"
-mkdir -p ${CASE4a}
-$EXC_OMP -i ${CASE4a}.in -k si.kss -s si.scr 2>&1 | tee ${CASE4a}.out
-mv mem tree ${CASE4a}.out ${CASE4a}/
+exc_mpi () {
+    local CASE=${1}
+    mkdir -p ${CASE}
+    mpiexec.hydra -np 192 -hosts fat1,fat2,fat3 \
+    $EXC_MPI -i ${CASE}.in -k si.kss -s si.scr 2>&1 | tee ${CASE}.out
+    if [ -e "outexc.mdf" ]; then broad outexc.mdf 0.05; fi
+    rm tree_* log_* mem_* out.kdotp_*
+    mv mem tree ${CASE}.out out*.mdf ${CASE}/
+}
 
-# Coupling, full diagonalization, parallel (stage 2, inverting the hamiltonian)
-CASE4b="exc04b-FH_FD"
-mkdir -p ${CASE4b}
+
+# Creating the KSS and SCR files with ABINIT (~1 min)
+abinit_mpi si_gen
+
+# Link the KSS and SCR files generated with ABINIT in the previous step
+ln -sf si_gen/si_o_DS2_KSS si.kss
+ln -sf si_gen/si_o_DS3_SCR si.scr
+
+# Tamm-Dancoff, full diagonalization, serial (~5 min)
+exc_openmp exc01-TD_FD
+
+# Tamm-Dancoff, Haydock diagonalization, parallel (~0.5 min)
+exc_openmp exc02-TD_HY
+
+# DOES NOT WORK! Coupling, Haydock diagonalization, parallel (~1 min)
+#exc_openmp exc03-FH_HY
+
+# Coupling, full diagonalization, parallel (creation of the hamiltonian, ~2 min)
+exc_openmp exc04a-FH_FD
+
+# Linking output from previous step for MPI diagonalization. Must be in same
+# directory, hence the dumb move commands
+mv exc04a-FH_FD/out.exh out.exh
+mv exc04a-FH_FD/out.exc out.exc
+mv exc04a-FH_FD/out.kdotp out.kdotp
 ln -sf out.exh in.exh
 ln -sf out.exc in.exc
 ln -sf out.kdotp in.kdotp
-mpiexec.hydra -np 192 -hosts fat1,fat2,fat3 $EXC_MPI -i ${CASE4b}.in -k si.kss -s si.scr 2>&1 | tee ${CASE4b}.out
-mv out.exc out.exh out.kdotp ${CASE4a}/
-mv mem tree ${CASE4b}.out out* ${CASE4b}/
-rm tree_* log_* mem_* out.kdotp_*
 
+# Coupling, MPI full diagonalization (inverting the hamiltonian, ~1 hour)
+exc_mpi exc04b-FH_FD 
+
+# Moce shit around and clean, all finished!
 unlink si.kss
 unlink si.scr
 unlink in.exc
 unlink in.exh
 unlink in.kdotp
+mv out.* exc04a-FH_FD

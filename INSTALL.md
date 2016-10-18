@@ -132,7 +132,7 @@ supported. To configure:
 unset CC; unset FC; unset F77; unset F90; unset CXX
 ./configure PETSC_ARCH=intel-2013.1.117 --with-mpiexec=mpiexec.hydra \
         --with-cc=mpiicc --with-cxx=mpiicpc --with-fc=mpiifort \
-        COPTFLAGS="-O3" CXXOPTFLAGS="-O3" FOPTFLAGS="-O3 -convert big_endian" \
+        COPTFLAGS="-O3" CXXOPTFLAGS="-O3" FOPTFLAGS="-O3" \
         --with-blas-lapack-dir="${MKLROOT}" --with-scalar-type=complex \
         --with-fortran-kernels=generic --with-large-file-io --with-debugging=0
 ```
@@ -190,16 +190,21 @@ sed -i -e 's/-static-libcxa//g' -e 's/ \${fftw} / "\${fftw}" /g' configure
 ```sh
 ./configure --prefix=/opt/science/bin/dp-5.2.99-r1883-intel13.1.117 \
         CC=icc F90=ifort CFLAGS="-g -O3" \
-        F90FLAGS="-g -O3 -nofor_main -unroll -convert big_endian" \
+        F90FLAGS="-g -O3 -nofor_main -unroll" \
         --with-fftw3=/opt/science/bin/fftw-3.3.5-intel13.1.117 \
         --with-blas="-L${MKLROOT}/lib/intel64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lpthread -lm"
 ```
 
 Verify that the configuration script identifies your build system correctly.
-`make` the software, then run the internal tests by executing `make test` and
-`make testexc` from the base directory, or just `make` in the `tests/` and
-`testsexc/` directories. When satisfied with the tests, install with `make
-install`.
+`make` the software. You will need to set
+
+```
+export F_UFMTENDIAN=big
+```
+
+in order to run the internal tests. Execute `make test` and `make testexc` from
+the base directory, or just `make` in the `tests/` and `testsexc/` directories.
+When satisfied with the tests, install with `make install`.
 
 
 ### For OpenMP parallelization
@@ -207,11 +212,19 @@ install`.
 ```sh
 ./configure --prefix=/opt/science/bin/dp-5.2.99-r1883-intel13.1.117 \
         CC=icc F90=ifort CFLAGS="-g -O3" \
-        F90FLAGS="-g -O3 -nofor_main -unroll -convert big_endian -openmp" \
+        F90FLAGS="-g -O3 -nofor_main -unroll -openmp" \
         --with-fftw3=/opt/science/bin/fftw-3.3.5-intel13.1.117 \
         --with-blas="-L${MKLROOT}/lib/intel64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lpthread -lm" \
         --enable-openmp
 ```
+
+Don't forget to set
+
+```
+export OMP_STACKSIZE=1G
+```
+
+before running the tests.
 
 `F90FLAGS="-O3 -I$MKLROOT/include"`
 
@@ -221,7 +234,7 @@ install`.
 ```sh
 ./configure --prefix=/opt/science/bin/dp-5.2.99-r1883-intel13.1.117 \
         CC=icc F90=ifort MPI_F90=mpiifort MPI_CC=mpiicc MPIRUN_PRE=mpiexec.hydra \
-        CFLAGS="-g -O3" F90FLAGS="-g -O3 -nofor_main -unroll -convert big_endian" \
+        CFLAGS="-g -O3" F90FLAGS="-g -O3 -nofor_main -unroll" \
         --with-fftw3=/opt/science/bin/fftw-3.3.5-intel13.1.117 \
         --with-blas="-L${MKLROOT}/lib/intel64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lpthread -lm" \
         --enable-mpi --enable-slepc
@@ -236,7 +249,7 @@ pseudopotentials
 ```sh
 ./configure --prefix=/opt/science/bin/dp-vnonlocal \
         CC=icc F90=ifort CFLAGS="-g -O3" \
-        F90FLAGS="-g -O3 -nofor_main -unroll -convert big_endian" \
+        F90FLAGS="-g -O3 -nofor_main -unroll" \
         --with-fftw3=/opt/science/bin/fftw-3.3.5-intel13.1.117 \
         --with-blas="-L${MKLROOT}/lib/intel64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lpthread -lm"
 ```
