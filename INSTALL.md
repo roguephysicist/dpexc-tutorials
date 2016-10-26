@@ -218,16 +218,6 @@ When satisfied with the tests, install with `make install`.
         --enable-openmp
 ```
 
-Don't forget to set
-
-```
-export OMP_STACKSIZE=1G
-```
-
-before running the tests.
-
-`F90FLAGS="-O3 -I$MKLROOT/include"`
-
 
 ### For MPI parallelization
 
@@ -268,10 +258,6 @@ endianness of the system. You can then run the tests with `make test` and
 `testsexc/` directories.
 
 REMEMBER `export OMP_STACKSIZE=1G`!!!!
-AND
-
-ALSO `testsexc/t16a.in` and `testsexc/t16b.in` ARE INDEED WHAT WE NEED TO DO!!!
-
 
 
 

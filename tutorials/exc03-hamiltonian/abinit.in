@@ -14,7 +14,6 @@ ngkpt     5 5 5        # Density of k points
 
 # Dataset1: usual self-consistent ground-state calculation
 # Definition of the k-point grid
-# nkpt1     44
 nshiftk1  4
 shiftk1   0.5 0.5 0.5  # This grid is the most economical
           0.5 0.0 0.0
@@ -25,7 +24,6 @@ prtden1   1            # Print out density
 
 # Dataset2: calculation of kss file
 # Definition of k-points
-# nkpt2     60           # A set of 19 k-points containing Gamma
 nshiftk2  4
 shiftk2   0.0 0.0 0.0  # This grid contains the Gamma point
           0.0 0.5 0.5
