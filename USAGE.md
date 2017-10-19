@@ -66,3 +66,32 @@ For example,
 ```sh
 (12x12x4x8x12)^2*8/1024^3 = 22 GB of memory.
 ```
+
+
+Files and Notation
+--------------------
+The resulting files can have many columns, for instance:
+
+```
+# omega eps_1 eps_2 for r c 1 2 3 x y z 
+```
+
+These are organized as follows:
+
+**17 total columns**
+
+| Columns   | Quantity                                                                                                                      |
+|-----------|-------------------------------------------------------------------------------------------------------------------------------|
+| 01        | frequency                                                                                                                     |
+| 02 & 03   | &straightepsilon;<sub>1</sub> & &straightepsilon;<sub>2</sub> for an average done over the reciprocal lattice directions      |
+| 04 & 05   | &straightepsilon;<sub>1</sub> & &straightepsilon;<sub>2</sub> for an average done over the cartesian coordinates<sup>1</sup>  |
+| 06 & 07   | &straightepsilon;<sub>1</sub> & &straightepsilon;<sub>2</sub> along the reciprocal lattice direction b1                       |
+| 08 & 09   | &straightepsilon;<sub>1</sub> & &straightepsilon;<sub>2</sub> along the reciprocal lattice direction b2                       |
+| 10 & 11   | &straightepsilon;<sub>1</sub> & &straightepsilon;<sub>2</sub> along the reciprocal lattice direction b3                       |
+| 12 & 13   | &straightepsilon;<sub>1</sub> & &straightepsilon;<sub>2</sub> along the cartesian coordinate x                                |
+| 14 & 15   | &straightepsilon;<sub>1</sub> & &straightepsilon;<sub>2</sub> along the cartesian coordinate y                                |
+| 16 & 17   | &straightepsilon;<sub>1</sub> & &straightepsilon;<sub>2</sub> along the cartesian coordinate z                                |
+
+*<sup>1</sup>(only this average makes real sense, because an artimetic average
+makes sense only among orthogonal axis - the reciprocal lattice directions are
+orthogonal only in the simple cubic case)*
