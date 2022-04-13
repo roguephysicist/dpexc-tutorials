@@ -20,6 +20,8 @@ To install and use the code, you will need the following software:
 * an Intel Math Kernel Library (MKL) installation (13.1.117 used here), or 
 * the LAPACK/BLAS Libraries if you do not have the Intel MKL.
 
+All tarballs can be found in `/opt/science/tarballs`.
+
 If your calculation with DP/EXC does not use the electron screening, such as an
 RPA calculation, you can use standard, more recent versions of ABINIT with
 identical results. This is useful for people who already have a working version
@@ -63,16 +65,16 @@ minutes to complete. You should test your installation after each build with
 `make check`. You can clean everything and start over with `make clean`.
 
 ```sh
-./configure --prefix=/opt/science/bin/fftw-3.3.5-intel13.1.117 \
+./configure --prefix=${PREFIX}/fftw-3.3.5-intel13.1.117 \
             CC=icc F77=ifort CPP='icpc -E' \
             CFLAGS="-O3" CPPFLAGS="-O3" FFLAGS="-O3" \
             && make && make install && make check && make clean
-./configure --prefix=/opt/science/bin/fftw-3.3.5-intel13.1.117 \
+./configure --prefix=${PREFIX}/fftw-3.3.5-intel13.1.117 \
             CC=icc F77=ifort CPP='icpc -E' \
             CFLAGS="-O3" CPPFLAGS="-O3" FFLAGS="-O3" \
             --enable-single --enable-openmp --enable-threads \
             && make && make install && make check && make clean
-./configure --prefix=/opt/science/bin/fftw-3.3.5-intel13.1.117 \
+./configure --prefix=${PREFIX}/fftw-3.3.5-intel13.1.117 \
             CC=icc F77=ifort CPP='icpc -E' \
             MPICC=mpiicc CFLAGS="-O3" CPPFLAGS="-O3" FFLAGS="-O3" \
             --enable-single --enable-mpi \
@@ -108,7 +110,7 @@ sed -i -e 's/mpicc/mpiicc/g' -e 's/mpicxx/mpiicpc/g' -e 's/mpif90/mpiifort/g' co
 Next, configure ABINIT:
 
 ```sh
-./configure --prefix=/opt/science/bin/abinit-5.7.3_etsf-intel13.1.117 \
+./configure --prefix=${PREFIX}/abinit-5.7.3_etsf-intel13.1.117 \
         FC=ifort CC=icc CXX=icpc FCFLAGS="-O3" CFLAGS="-O3" CXXFLAGS="-O3" \
         --enable-mpi="yes" --with-mpi-level=1 --with-mpi-runner=mpiexec.hydra \
         --with-mpi-prefix="${I_MPI_ROOT}/intel64"  --disable-all-plugins \
@@ -159,9 +161,9 @@ export SLEPC_DIR=<path to SLEPc source>
 For Medusa, these could be:
 
 ```sh
-export PETSC_DIR=/opt/science/bin/petsc-3.4.3-intel13.1.117
+export PETSC_DIR=${PREFIX}/petsc-3.4.3-intel13.1.117
 export PETSC_ARCH=intel-2013.1.117
-export SLEPC_DIR=/opt/science/bin/slepc-3.4.3-intel13.1.117
+export SLEPC_DIR=${PREFIX}/slepc-3.4.3-intel13.1.117
 ```
 
 Run `./configure` and then simply follow the on-screen instructions. This
@@ -171,7 +173,8 @@ process should take under a minute.
 DP 5.2.99-r1883:
 -----------------------------------------------
 
-First, patch.
+The `dp-5.2.99-r1883.tgz` tarball in `/opt/science/tarballs` already includes
+patch that enables PETSC/SLEPc integration.
 
 Create some missing files to avoid some installation errors later.
 
@@ -185,87 +188,116 @@ Prepare the config script:
 sed -i -e 's/-static-libcxa//g' -e 's/ \${fftw} / "\${fftw}" /g' configure
 ```
 
-### For sequential use:
+### For sequential use
+
+The sequential version is good to have for testing and debugging, but is rarely used in practice.
+Issue the following configure command:
 
 ```sh
-./configure --prefix=/opt/science/bin/dp-5.2.99-r1883-intel13.1.117 \
+./configure --prefix=${PREFIX}/dp-5.2.99-r1883-intel13.1.117 \
         CC=icc F90=ifort CFLAGS="-g -O3" \
         F90FLAGS="-g -O3 -nofor_main -unroll" \
-        --with-fftw3=/opt/science/bin/fftw-3.3.5-intel13.1.117 \
+        --with-fftw3=${PREFIX}/fftw-3.3.5-intel13.1.117 \
         --with-blas="-L${MKLROOT}/lib/intel64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lpthread -lm"
 ```
 
-Verify that the configuration script identifies your build system correctly.
-`make` the software. You will need to set
+Verify that the configuration script identifies your build system correctly and run
 
 ```
-export F_UFMTENDIAN=big
+make
 ```
 
-in order to run the internal tests. Execute `make test` and `make testexc` from
+You will need to set `export F_UFMTENDIAN=big` in order to run the internal tests.
+Execute `make test` and `make testexc` from
 the base directory, or just `make` in the `tests/` and `testsexc/` directories.
-When satisfied with the tests, install with `make install`.
+
+When satisfied with the tests, install with
+
+```
+make install
+```
 
 
 ### For OpenMP parallelization
 
+The OpenMP version is by far the most used for actual calculations. This will only
+work on a single node, but you will be able to leverage a very efficient shared-memory
+model that will drastically reduce your memory requirements.
+
+If you are within the same source tree, be sure to issue a `make cleanall` before proceeding.
+Repeat the same steps as the last section, but with the following configure command:
+
 ```sh
-./configure --prefix=/opt/science/bin/dp-5.2.99-r1883-intel13.1.117 \
+./configure --prefix=${PREFIX}/dp-5.2.99-r1883-intel13.1.117 \
         CC=icc F90=ifort CFLAGS="-g -O3" \
         F90FLAGS="-g -O3 -nofor_main -unroll -openmp" \
-        --with-fftw3=/opt/science/bin/fftw-3.3.5-intel13.1.117 \
+        --with-fftw3=${PREFIX}/fftw-3.3.5-intel13.1.117 \
         --with-blas="-L${MKLROOT}/lib/intel64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lpthread -lm" \
         --enable-openmp
 ```
 
+Remember that OpenMP parallelization is enabled through the environment variable `OMP_NUM_THREADS`.
+You will need to do something like
+
+```
+export OMP_NUM_THREADS=4
+```
+
+to enable your tests and calculations to run on 4 cores, for example. Also be sure to set the
+following before running with this version:
+
+```
+export OMP_STACKSIZE=1G
+```
+
+Make the software, run the tests, and install just as described in the previous section.
+
 
 ### For MPI parallelization
 
+MPI parallelization is mostly used for the parallel diagonalization of the excitonic Hamiltonian
+via PETSC/SLEPc. It can be used in lieu of the OpenMP parallelization if you needed to use several
+nodes at a time, but is generally less efficient. Calculations will typically take longer and will
+obviously require more memory.
+
+If you are within the same source tree, be sure to issue a `make cleanall` before proceeding.
+Repeat the same steps as the last section, but with the following configure command:
+
 ```sh
-./configure --prefix=/opt/science/bin/dp-5.2.99-r1883-intel13.1.117 \
-        CC=icc F90=ifort MPI_F90=mpiifort MPI_CC=mpiicc MPIRUN_PRE=mpiexec.hydra \
+./configure --prefix=${PREFIX}/dp-5.2.99-r1883-intel13.1.117 \
+        CC=icc F90=ifort MPI_F90=mpiifort MPI_CC=mpiicc MPIRUN_PRE=mpirun \
         CFLAGS="-g -O3" F90FLAGS="-g -O3 -nofor_main -unroll" \
-        --with-fftw3=/opt/science/bin/fftw-3.3.5-intel13.1.117 \
+        --with-fftw3=${PREFIX}/fftw-3.3.5-intel13.1.117 \
         --with-blas="-L${MKLROOT}/lib/intel64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lpthread -lm" \
         --enable-mpi --enable-slepc
 ```
 
-Lastly, `make cleanall`, `make` `make install`.
+Make the software, run the tests, and install just as described in the first DP section.
 
 
-### For calculating the matrix elements including the nonlocal part of the 
-pseudopotentials
+### For calculating the matrix elements including the nonlocal part of the pseudopotentials
+
+This is the modified source code for calculating Vnl for TINIBA. Do not use this for any
+other purpose. The copy of this modified source code is located in `/opt/science/src/dp-vnonlocal/`.
+Follow the same procedure as the last three sections, but utlize the following configure command:
 
 ```sh
-./configure --prefix=/opt/science/bin/dp-vnonlocal \
+./configure --prefix=${PREFIX}/dp-vnonlocal \
         CC=icc F90=ifort CFLAGS="-g -O3" \
         F90FLAGS="-g -O3 -nofor_main -unroll" \
-        --with-fftw3=/opt/science/bin/fftw-3.3.5-intel13.1.117 \
+        --with-fftw3=${PREFIX}/fftw-3.3.5-intel13.1.117 \
         --with-blas="-L${MKLROOT}/lib/intel64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lpthread -lm"
 ```
 
+Make and install the software just as described in the first DP section; the tests will likely
+not pass, so there is no point in running them.
 
 
+### Testing Summary
 
-
-
-
-### TESTING
-
-To run the tests, you need to run `export F_UFMTENDIAN=big` to account for the
+As explained above, to run the tests, you need to run `export F_UFMTENDIAN=big` to account for the
 endianness of the system. You can then run the tests with `make test` and 
 `make testexc` from the base directory, or just `make` in the `tests/` and 
 `testsexc/` directories.
 
-REMEMBER `export OMP_STACKSIZE=1G`!!!!
-
-
-
-
-
-For VNL
-
-```sh
-./configure CC=icc F90=ifort F90FLAGS="-O3 -nofor_main" CFLAGS="-O3" --with-fftw3=/home/sma/bin-2013/fftw-3.3.5/ --with-blas="-L${MKLROOT}/lib/intel64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lpthread -lm" && make && make install
-
-```
+If using the OpenMP version, make sure to also do `export OMP_STACKSIZE=1G` before running.
