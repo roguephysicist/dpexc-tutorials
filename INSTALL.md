@@ -50,34 +50,37 @@ module load intel-compilers/13.1.117 intel-mpi/4.1.0.024 intel-mkl/13.1.117
 
 Confirm that they loaded corrected with `module list`. Again, if you do not have
 the `modules` package configured, just make sure you have the appropriate paths
-in your $PATH. It is also convenient to setup the installation directory
-beforehand, I use the variable `${INSTALL_PRE}` here. There are also common
-compiler flags used in all programs, so I will also define `${COMP_FLAGS}`. We
-can export both easily:
+in your `$PATH`. It is also convenient to setup the installation directory
+beforehand, I use the variable `${PREFIX}` here. You can simply set it to whatever
+directory you want:
+
+```
+export PREFIX=/path/to/mysoftware/
+```
 
 FFTW 3.3.5
 -----------------------------------------------
 
 I recommend installing FFTW first so that it is available to use with both
 ABINIT 5.7.3 (optional) and DP/EXC. Each one of these builds takes less than 5
-minutes to complete. You should test your installation after each build with
-`make check`. You can clean everything and start over with `make clean`.
+minutes to complete. Notice that there are three builds that need to be carried out,
+one after the other. Each command below includes testing, installation, and cleaning:
 
 ```sh
 ./configure --prefix=${PREFIX}/fftw-3.3.5-intel13.1.117 \
             CC=icc F77=ifort CPP='icpc -E' \
             CFLAGS="-O3" CPPFLAGS="-O3" FFLAGS="-O3" \
-            && make && make install && make check && make clean
+            && make && make check && make install && make clean
 ./configure --prefix=${PREFIX}/fftw-3.3.5-intel13.1.117 \
             CC=icc F77=ifort CPP='icpc -E' \
             CFLAGS="-O3" CPPFLAGS="-O3" FFLAGS="-O3" \
             --enable-single --enable-openmp --enable-threads \
-            && make && make install && make check && make clean
+            && make && make check && make install && make clean
 ./configure --prefix=${PREFIX}/fftw-3.3.5-intel13.1.117 \
             CC=icc F77=ifort CPP='icpc -E' \
             MPICC=mpiicc CFLAGS="-O3" CPPFLAGS="-O3" FFLAGS="-O3" \
             --enable-single --enable-mpi \
-            && make && make install && make check && make clean
+            && make && make check && make install && make clean
 ```
 
 
@@ -111,7 +114,7 @@ Next, configure ABINIT:
 ```sh
 ./configure --prefix=${PREFIX}/abinit-5.7.3_etsf-intel13.1.117 \
         FC=ifort CC=icc CXX=icpc FCFLAGS="-O3" CFLAGS="-O3" CXXFLAGS="-O3" \
-        --enable-mpi="yes" --with-mpi-level=1 --with-mpi-runner=mpiexec.hydra \
+        --enable-mpi="yes" --with-mpi-level=1 --with-mpi-runner=mpirun \
         --with-mpi-prefix="${I_MPI_ROOT}/intel64"  --disable-all-plugins \
         --enable-mpi-trace --enable-64bit-flags --enable-gw-dpc
 ```
@@ -127,11 +130,14 @@ PETSC 3.4.3
 
 This version of DP is MPI enabled for parallelizing the full excitonic
 Hamiltonian, enabled through the PETSc library. Version 3.4.3 of PETSc is
-supported. To configure:
+supported.
+
+Note that you need to uncompress the PETSC source directly in the path you want.
+There is no installation step after compiling. To configure:
 
 ```sh
 unset CC; unset FC; unset F77; unset F90; unset CXX
-./configure PETSC_ARCH=intel-2013.1.117 --with-mpiexec=mpiexec.hydra \
+./configure PETSC_ARCH=intel-2013.1.117 --with-mpiexec=mpirun \
         --with-cc=mpiicc --with-cxx=mpiicpc --with-fc=mpiifort \
         COPTFLAGS="-O3" CXXOPTFLAGS="-O3" FOPTFLAGS="-O3" \
         --with-blas-lapack-dir="${MKLROOT}" --with-scalar-type=complex \
@@ -157,7 +163,7 @@ export PETSC_ARCH=<from PETSc installation>
 export SLEPC_DIR=<path to SLEPc source>
 ```
 
-For Medusa, these could be:
+For MEDUSA, these could be:
 
 ```sh
 export PETSC_DIR=${PREFIX}/petsc-3.4.3-intel13.1.117
