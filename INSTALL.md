@@ -12,8 +12,7 @@ Requirements
 
 To install and use the code, you will need the following software:
 
-* ABINIT 5.7.3 ETSF, available from [Matteo Gatti]
-    (mailto:matteo.gatti@polytechnique.edu)
+* ABINIT 5.7.3 ETSF, available from [Matteo Gatti](mailto:matteo.gatti@polytechnique.edu)
 * the [FFTW library](http://www.fftw.org) (FFTW 3.3.4 used here),
 * the [PETSc library](https://www.mcs.anl.gov/petsc/) (3.4.3 **only**)
 * the [SLEPc library](http://slepc.upv.es) (3.4.3 **only**)
